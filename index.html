@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مفرداتي | دليلك</title>
+<meta name="theme-color" content="#4f46e5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="مفرداتي">
+<link rel="icon" href="https://dalilk.com/assets/images/logos/black.svg" media="(prefers-color-scheme: light)" type="image/svg+xml">
+<link rel="icon" href="https://dalilk.com/assets/images/logos/white.svg" media="(prefers-color-scheme: dark)" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="manifest" href="./manifest.json">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js');
+  }
+  try { var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+</script>
+<style>
+:root{
+  --bg:#f6f4fb; --bg2:#ece8fa; --surface:rgba(255,255,255,.78); --solid:#ffffff;
+  --ink:#1b1a33; --muted:#6f6d8c; --line:rgba(79,70,229,.12);
+  --p1:#4f46e5; --p2:#7c3aed; --teal:#14b8a6; --warm:#fff7ec;
+  --ok:#16a34a; --ok-bg:#dcfce7; --no:#e11d48; --no-bg:#ffe4e9;
+  --shadow:0 10px 30px rgba(79,70,229,.14); --shadow-s:0 3px 10px rgba(40,30,120,.08);
+  --grad:linear-gradient(135deg,#4f46e5,#7c3aed);
+  --card-front:linear-gradient(160deg,#ffffff,#f1edff);
+  --card-back:linear-gradient(160deg,#4f46e5,#7c3aed 70%,#9333ea);
+  --nav-h:62px; --ad-h:56px; --w:560px;
+}
+:root[data-theme="dark"]{
+  --bg:#0e0d1f; --bg2:#17152e; --surface:rgba(30,28,60,.72); --solid:#1c1a38;
+  --ink:#f2f0ff; --muted:#a09dc4; --line:rgba(167,139,250,.16);
+  --p1:#8b83ff; --p2:#a78bfa; --teal:#2dd4bf; --warm:#2a2540;
+  --ok:#4ade80; --ok-bg:rgba(34,197,94,.16); --no:#fb7185; --no-bg:rgba(244,63,94,.16);
+  --shadow:0 12px 34px rgba(0,0,0,.45); --shadow-s:0 3px 10px rgba(0,0,0,.35);
+  --card-front:linear-gradient(160deg,#25224a,#1a1836);
+  --card-back:linear-gradient(160deg,#5b50e6,#7c3aed 70%,#8b2fd0);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e0d1f; --bg2:#17152e; --surface:rgba(30,28,60,.72); --solid:#1c1a38;
+    --ink:#f2f0ff; --muted:#a09dc4; --line:rgba(167,139,250,.16);
+    --p1:#8b83ff; --p2:#a78bfa; --teal:#2dd4bf; --warm:#2a2540;
+    --ok:#4ade80; --ok-bg:rgba(34,197,94,.16); --no:#fb7185; --no-bg:rgba(244,63,94,.16);
+    --shadow:0 12px 34px rgba(0,0,0,.45); --shadow-s:0 3px 10px rgba(0,0,0,.35);
+    --card-front:linear-gradient(160deg,#25224a,#1a1836);
+    --card-back:linear-gradient(160deg,#5b50e6,#7c3aed 70%,#8b2fd0);
+  }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;min-height:100%}
+body{
+  font-family:'Tajawal','Inter',system-ui,sans-serif;color:var(--ink);font-weight:500;line-height:1.6;
+  background:
+    radial-gradient(520px 320px at 100% -40px,rgba(124,58,237,.22),transparent 70%),
+    radial-gradient(460px 300px at 0% 30%,rgba(20,184,166,.14),transparent 70%),
+    var(--bg);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:calc(var(--nav-h) + var(--ad-h) + env(safe-area-inset-bottom,0px) + 18px);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0}
+button:focus-visible,input:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.en{direction:ltr;unicode-bidi:isolate;font-family:'Inter','Tajawal',sans-serif}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.hidden{display:none!important}
+
+.app{max-width:var(--w);margin:0 auto;padding:0 16px}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 10px;
+  background:linear-gradient(var(--bg) 70%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.top-in{max-width:var(--w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{width:42px;height:42px;border-radius:14px;background:var(--grad);display:grid;place-items:center;color:#fff;
+  box-shadow:0 8px 18px rgba(79,70,229,.35);font-weight:800;font-size:20px}
+.brand h1{margin:0;font-size:20px;font-weight:800;line-height:1.1}
+.brand p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+.icon-btn{width:42px;height:42px;border-radius:14px;background:var(--surface);border:1px solid var(--line);
+  display:grid;place-items:center;box-shadow:var(--shadow-s);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.icon-btn .sun{display:none}
+:root[data-theme="dark"] .icon-btn .sun{display:block}
+:root[data-theme="dark"] .icon-btn .moon{display:none}
+
+/* chips */
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 16px 10px;margin:0 -16px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:9px 15px;border-radius:999px;background:var(--surface);border:1px solid var(--line);
+  font-weight:700;font-size:13.5px;white-space:nowrap;transition:.2s;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.chip .c{margin-inline-start:6px;font-size:11.5px;color:var(--muted);font-weight:600}
+.chip.active{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(79,70,229,.35)}
+.chip.active .c{color:rgba(255,255,255,.8)}
+
+/* search */
+.search{position:relative;margin:2px 0 14px}
+.search .ico{position:absolute;inset-inline-start:15px;top:50%;transform:translateY(-50%);color:var(--muted);width:20px;height:20px}
+.search input{width:100%;height:50px;border-radius:16px;border:1px solid var(--line);background:var(--surface);color:var(--ink);
+  font:inherit;font-size:15.5px;padding:0 46px;box-shadow:var(--shadow-s);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.search input::placeholder{color:var(--muted)}
+.search .clear{position:absolute;inset-inline-end:10px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;
+  background:var(--bg2);display:none;place-items:center;color:var(--muted)}
+.search .clear.show{display:grid}
+.search .clear .ico{position:static;transform:none;width:15px;height:15px;color:inherit}
+
+/* progress */
+.meta{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted);font-weight:700;margin-bottom:8px}
+.meta b{color:var(--p1)}
+.bar{height:10px;border-radius:99px;background:var(--bg2);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--teal),var(--p1));transition:width .35s cubic-bezier(.3,1.3,.5,1)}
+
+/* flashcard */
+.stage{perspective:1600px;margin:18px 0 16px;touch-action:pan-y}
+.flip{position:relative;width:100%;height:min(62vh,430px);min-height:360px;cursor:pointer;
+  transition:transform .7s cubic-bezier(.34,1.45,.45,1);transform-style:preserve-3d}
+.flip.on{transform:rotateY(180deg)}
+.stage.pop .flip{animation:pop .45s cubic-bezier(.3,1.6,.5,1)}
+.stage.pop.sl .flip{animation:popL .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:translateX(40px) scale(.92);opacity:0}100%{transform:none;opacity:1}}
+@keyframes popL{0%{transform:translateX(-40px) scale(.92);opacity:0}100%{transform:none;opacity:1}}
+.face{position:absolute;inset:0;border-radius:30px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:26px;box-shadow:var(--shadow);overflow:hidden}
+.front{background:var(--card-front);border:1px solid var(--line)}
+.front::before{content:"";position:absolute;width:240px;height:240px;border-radius:50%;inset-block-start:-90px;inset-inline-end:-90px;
+  background:radial-gradient(circle,rgba(124,58,237,.22),transparent 70%)}
+.back{background:var(--card-back);color:#fff;transform:rotateY(180deg)}
+.back::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;inset-block-end:-90px;inset-inline-start:-80px;
+  background:radial-gradient(circle,rgba(45,212,191,.35),transparent 70%)}
+.tag{position:absolute;top:18px;inset-inline-start:18px;font-size:12px;font-weight:700;padding:5px 12px;border-radius:99px;
+  background:rgba(79,70,229,.1);color:var(--p1);max-width:70%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.back .tag{background:rgba(255,255,255,.18);color:#fff}
+.word{font-size:clamp(34px,10vw,50px);font-weight:800;letter-spacing:-.5px;line-height:1.15;word-break:break-word;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+:root[data-theme="dark"] .word{background:linear-gradient(135deg,#c4b5fd,#8b83ff);-webkit-background-clip:text;background-clip:text}
+.spk{margin-top:22px;width:68px;height:68px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;
+  box-shadow:0 10px 24px rgba(79,70,229,.4);transition:transform .15s;position:relative;z-index:2}
+.spk:active{transform:scale(.9)}
+.spk .ico{width:30px;height:30px}
+.spk.sm{width:44px;height:44px;margin:0;background:rgba(255,255,255,.2);box-shadow:none;flex:none}
+.spk.sm .ico{width:21px;height:21px}
+.spk.playing{animation:pulse .8s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 14px rgba(124,58,237,.18)}}
+.hint{position:absolute;bottom:18px;font-size:12.5px;color:var(--muted);font-weight:600}
+.mean{font-size:clamp(22px,6.4vw,30px);font-weight:800;line-height:1.5;position:relative;z-index:1}
+.sep{width:56px;height:4px;border-radius:4px;background:rgba(255,255,255,.55);margin:16px auto}
+.sent{width:100%;position:relative;z-index:1}
+.s-row{display:flex;align-items:center;justify-content:center;gap:12px}
+.s-en{font-size:17px;font-weight:600;line-height:1.5;direction:ltr}
+.s-ar{margin-top:8px;font-size:14.5px;opacity:.88}
+
+/* buttons */
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{height:54px;border-radius:18px;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .12s}
+.btn:active{transform:scale(.96)}
+.btn.again{background:var(--surface);border:2px solid var(--line);color:var(--p1)}
+.btn.know{background:linear-gradient(135deg,#14b8a6,#0d9488);color:#fff;box-shadow:0 8px 18px rgba(20,184,166,.35)}
+.nav-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}
+.mini{height:46px;padding:0 16px;border-radius:14px;background:var(--surface);border:1px solid var(--line);font-weight:700;font-size:14px;
+  display:flex;align-items:center;gap:7px;box-shadow:var(--shadow-s)}
+.mini .ico{width:18px;height:18px}
+.pager{display:flex;gap:8px}
+.pager .mini{width:46px;padding:0;justify-content:center}
+.pager .mini .ico{transform:scaleX(-1)}
+.pager .mini.nx .ico{transform:none}
+
+.empty{text-align:center;padding:48px 20px;color:var(--muted)}
+.empty .big{font-size:44px;margin-bottom:6px}
+.empty h3{margin:0 0 4px;color:var(--ink);font-size:18px}
+
+/* list */
+.list{display:flex;flex-direction:column;gap:10px}
+.row{display:flex;align-items:center;gap:12px;padding:14px;border-radius:18px;background:var(--surface);border:1px solid var(--line);
+  box-shadow:var(--shadow-s);text-align:start;width:100%;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .12s}
+.row:active{transform:scale(.985)}
+.row .t{flex:1;min-width:0}
+.row .e{font-weight:800;font-size:17px;color:var(--p1)}
+.row .a{font-size:13.5px;color:var(--muted);margin-top:1px}
+.row .spk{margin:0;width:42px;height:42px;box-shadow:none}
+.row .spk .ico{width:20px;height:20px}
+mark{background:rgba(250,204,21,.4);color:inherit;border-radius:4px;padding:0 2px}
+
+/* quiz */
+.stats{display:flex;gap:10px;margin:2px 0 12px}
+.pill{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;border-radius:16px;background:var(--surface);
+  border:1px solid var(--line);font-weight:700;font-size:13.5px;color:var(--muted);box-shadow:var(--shadow-s)}
+.pill b{font-size:18px;color:var(--ink)}
+.qcard{margin-top:16px;padding:22px 18px;border-radius:26px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.qtype{display:inline-block;font-size:12.5px;font-weight:800;color:var(--p1);background:rgba(79,70,229,.1);padding:5px 12px;border-radius:99px;margin-bottom:12px}
+.qtext{font-size:23px;font-weight:800;line-height:1.5;margin:0}
+.qtext .en{color:var(--p1)}
+.qsub{margin:6px 0 0;font-size:14px;color:var(--muted)}
+.opts{display:grid;gap:11px;margin-top:20px}
+.opt{padding:16px;border-radius:18px;background:var(--solid);border:2px solid var(--line);border-bottom-width:4px;
+  font-weight:700;font-size:16.5px;text-align:center;transition:transform .12s,background .15s,border-color .15s}
+.opt:active:not(.locked){transform:translateY(2px);border-bottom-width:2px}
+.opt.correct{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+.opt.wrong{background:var(--no-bg);border-color:var(--no);color:var(--no);animation:shake .4s}
+.opt.dim{opacity:.5}
+@keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.sheet{margin-top:16px;padding:16px;border-radius:20px;display:none;flex-direction:column;gap:12px;animation:up .3s cubic-bezier(.3,1.4,.5,1)}
+.sheet.show{display:flex}
+.sheet.good{background:var(--ok-bg);color:var(--ok)}
+.sheet.bad{background:var(--no-bg);color:var(--no)}
+.sheet .msg{font-weight:800;font-size:17px}
+.sheet .msg small{display:block;font-weight:600;font-size:14px;margin-top:2px}
+.go{height:52px;border-radius:16px;font-weight:800;font-size:16px;color:#fff}
+.sheet.good .go{background:var(--ok)}
+.sheet.bad .go{background:var(--no)}
+@keyframes up{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+.done{text-align:center;padding:34px 18px;border-radius:28px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);margin-top:16px;animation:up .4s}
+.ring{--v:0;width:148px;height:148px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;
+  background:conic-gradient(var(--teal) calc(var(--v)*1%),var(--bg2) 0)}
+.ring span{width:118px;height:118px;border-radius:50%;background:var(--solid);display:grid;place-items:center;font-size:30px;font-weight:800;color:var(--p1)}
+.done h3{margin:0 0 4px;font-size:22px}
+.done p{margin:0 0 18px;color:var(--muted)}
+.cta{display:inline-flex;align-items:center;justify-content:center;height:54px;padding:0 34px;border-radius:99px;background:var(--grad);
+  color:#fff;font-weight:800;font-size:16px;box-shadow:0 10px 22px rgba(79,70,229,.4)}
+
+/* dock: tab bar + ad banner */
+.dock{position:fixed;inset-inline:0;bottom:0;z-index:30;padding-bottom:env(safe-area-inset-bottom,0px);
+  background:var(--surface);border-top:1px solid var(--line);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.tabs{max-width:var(--w);margin:0 auto;height:var(--nav-h);display:grid;grid-template-columns:repeat(3,1fr);padding:0 10px}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:12px;font-weight:700;color:var(--muted);position:relative;transition:color .2s}
+.tab .ico{width:24px;height:24px;transition:transform .25s cubic-bezier(.3,1.7,.5,1)}
+.tab.active{color:var(--p1)}
+.tab.active .ico{transform:translateY(-2px) scale(1.12)}
+.tab.active::before{content:"";position:absolute;top:0;width:28px;height:4px;border-radius:0 0 6px 6px;background:var(--grad)}
+.ad{height:var(--ad-h);margin:0 auto;max-width:var(--w);padding:6px 12px 8px}
+#ad-banner{height:100%;border:1.5px dashed var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;
+  gap:8px;font-size:12px;color:var(--muted);font-weight:600;background:rgba(127,127,170,.06);overflow:hidden}
+#ad-banner small{font-size:10px;padding:1px 6px;border-radius:5px;background:var(--bg2)}
+
+
+/* ---------- Responsive: tablet & laptop ---------- */
+@media (min-width:768px){
+  :root{--w:760px;--nav-h:68px;--ad-h:64px}
+  .app{padding:0 24px}
+  .top{padding-inline:24px}
+  .chips{padding-inline:24px;margin-inline:-24px;flex-wrap:wrap;overflow:visible}
+  .flip{height:min(60vh,500px);min-height:420px}
+  .word{font-size:clamp(46px,6vw,64px)}
+  .mean{font-size:34px}
+  .s-en{font-size:20px}.s-ar{font-size:16px}
+  .tag{font-size:13px}
+  .qtext{font-size:28px}
+  .opts{grid-template-columns:1fr 1fr}
+  .opt{font-size:18px;padding:20px}
+  .qcard{padding:28px 26px}
+  .btn{height:58px;font-size:17px}
+  .tab{font-size:13px}
+}
+@media (min-width:1100px){
+  :root{--w:1040px}
+  .stage{max-width:680px;margin-inline:auto}
+  #deckWrap{max-width:680px;margin-inline:auto}
+  #v-cards .meta,#v-cards .bar{max-width:680px;margin-inline:auto}
+  #v-quiz{max-width:780px;margin-inline:auto}
+  .list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .row:hover{border-color:var(--p1)}
+  .btn:hover,.mini:hover,.chip:hover,.opt:hover:not(.locked){filter:brightness(1.04)}
+  .opt:hover:not(.locked){border-color:var(--p1)}
+}
+@media (max-width:360px){
+  .brand p{display:none}
+  .chip{padding:8px 12px;font-size:12.5px}
+  .opt{font-size:15.5px;padding:14px}
+}
+@media (max-height:520px) and (orientation:landscape){
+  .flip{height:300px;min-height:260px}
+  .spk{margin-top:12px;width:56px;height:56px}
+  .hint{display:none}
+  .word{font-size:36px}
+  :root{--nav-h:52px;--ad-h:50px}
+  .tab{flex-direction:row;gap:6px;font-size:12px}
+}
+
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<!-- SVG icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-spk" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 6a9 9 0 0 1 0 12"/></symbol>
+  <symbol id="i-cards" viewBox="0 0 24 24"><rect x="3" y="6" width="14" height="14" rx="3"/><path d="M7 3h11a3 3 0 0 1 3 3v11"/></symbol>
+  <symbol id="i-game" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand">
+      <div class="logo">م</div>
+      <div>
+        <h1>مفرداتي</h1>
+        <p>تعلّم، اسمع، وتمرّن</p>
+      </div>
+    </div>
+    <button class="icon-btn" id="theme" aria-label="تبديل الوضع الليلي">
+      <svg class="ico moon"><use href="#i-moon"/></svg>
+      <svg class="ico sun"><use href="#i-sun"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="app">
+  <div class="chips" id="filters"></div>
+
+  <div class="search" id="searchBox">
+    <svg class="ico"><use href="#i-search"/></svg>
+    <input id="q" type="search" placeholder="ابحث بالإنجليزي أو العربي…" autocomplete="off" enterkeyhint="search" aria-label="بحث في الكلمات">
+    <button class="clear" id="qclear" aria-label="مسح البحث"><svg class="ico"><use href="#i-x"/></svg></button>
+  </div>
+
+  <!-- CARDS -->
+  <section id="v-cards">
+    <div class="meta"><span><b id="fpos">0</b> / <span id="fcount">0</span></span><span>عرفت <b id="fknown">0</b></span></div>
+    <div class="bar"><i id="fbar"></i></div>
+
+    <div id="deckWrap">
+      <div class="stage" id="stage">
+        <div class="flip" id="fcard" role="button" tabindex="0" aria-label="اضغط لقلب البطاقة">
+          <div class="face front">
+            <span class="tag" id="ftag"></span>
+            <div class="word en" id="fword"></div>
+            <button class="spk" id="fspk" aria-label="نطق الكلمة"><svg class="ico"><use href="#i-spk"/></svg></button>
+            <div class="hint">اضغط لقلب البطاقة</div>
+          </div>
+          <div class="face back">
+            <span class="tag" id="btag"></span>
+            <div class="mean" id="bmean"></div>
+            <div class="sep"></div>
+            <div class="sent">
+              <div class="s-row">
+                <div class="s-en en" id="bsen"></div>
+                <button class="spk sm" id="bspk" aria-label="نطق الجملة"><svg class="ico"><use href="#i-spk"/></svg></button>
+              </div>
+              <div class="s-ar" id="bsar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acts">
+        <button class="btn again" id="cAgain">↻ راجعها</button>
+        <button class="btn know" id="cKnow">✓ أعرفها</button>
+      </div>
+      <div class="nav-row">
+        <button class="mini" id="shuffle"><svg class="ico"><use href="#i-shuffle"/></svg>خلط</button>
+        <div class="pager">
+          <button class="mini" id="prev" aria-label="السابقة"><svg class="ico"><use href="#i-chev"/></svg></button>
+          <button class="mini nx" id="next" aria-label="التالية"><svg class="ico" style="transform:scaleX(-1)"><use href="#i-chev"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty hidden" id="emptyCards">
+      <div class="big">🔍</div>
+      <h3>ما لقينا نتائج</h3>
+      <div>جرّب كلمة أخرى أو امسح البحث.</div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="v-quiz" class="hidden">
+    <div class="stats">
+      <div class="pill">⭐ نتيجتك <b id="sc">0</b></div>
+      <div class="pill">🔥 سلسلة <b id="streak">0</b></div>
+    </div>
+    <div class="bar"><i id="qbar"></i></div>
+
+    <div id="quiz">
+      <div class="qcard">
+        <span class="qtype" id="qtype"></span>
+        <p class="qtext" id="qtext"></p>
+        <p class="qsub" id="qsub"></p>
+        <div class="opts" id="opts"></div>
+      </div>
+      <div class="sheet" id="fb">
+        <div class="msg" id="fbmsg"></div>
+        <button class="go" id="qNext">متابعة</button>
+      </div>
+    </div>
+
+    <div class="done hidden" id="done">
+      <div class="ring" id="ring"><span id="pct">0%</span></div>
+      <h3 id="doneTitle">أنهيت التمارين!</h3>
+      <p id="doneMsg"></p>
+      <button class="cta" id="restart">جولة جديدة</button>
+    </div>
+  </section>
+
+  <!-- LIST -->
+  <section id="v-list" class="hidden">
+    <div class="meta"><span>الكلمات: <b id="lcount">0</b></span><span>اضغط الكلمة لفتح بطاقتها</span></div>
+    <div class="list" id="list"></div>
+    <div class="empty hidden" id="emptyList">
+      <div class="big">🔍</div>
+      <h3>ما لقينا نتائج</h3>
+      <div>جرّب كلمة أخرى أو امسح البحث.</div>
+    </div>
+  </section>
+</div>
+
+<!-- Bottom dock: tabs + ad banner -->
+<div class="dock">
+  <nav class="tabs" aria-label="التنقل">
+    <button class="tab active" data-view="cards"><svg class="ico"><use href="#i-cards"/></svg>البطاقات</button>
+    <button class="tab" data-view="quiz"><svg class="ico"><use href="#i-game"/></svg>التمارين</button>
+    <button class="tab" data-view="list"><svg class="ico"><use href="#i-list"/></svg>الكلمات</button>
+  </nav>
+  <div class="ad">
+    <!-- ضع كود الإعلان (AdSense / AdMob web / أي شبكة) داخل الحاوية التالية -->
+    <div id="ad-banner"><small>إعلان</small> مساحة إعلانية 320×50</div>
+  </div>
+</div>
+
+<script>
+/* صيغة الكلمة: [الإنجليزية، العربية، الجملة بالإنجليزية، الجملة بالعربية] */
+const RAW = [
+{ id:"key_vocab", title:"الكلمات الرئيسية (Key Vocab)", w:[
+["access","إمكانية الوصول والاستفادة (اسم - n.)","Students have free access to the library.","لدى الطلاب إمكانية الوصول المجاني إلى المكتبة."],
+["enjoyment","استمتاع (اسم - n.)","Reading brings me a lot of enjoyment.","القراءة تجلب لي الكثير من الاستمتاع."],
+["life skill","مهارة حياتية (اسم - n.)","Communication is an essential life skill.","التواصل مهارة حياتية أساسية."],
+["competitive","تنافسي (صفة - adj.)","The job market is very competitive today.","سوق العمل تنافسي للغاية اليوم."],
+["inactive","غير نشيط - خامل (صفة - adj.)","An inactive lifestyle can lead to health problems.","أسلوب الحياة غير النشيط يمكن أن يؤدي إلى مشاكل صحية."],
+["psychological","نفسي - ذهني (صفة - adj.)","Stress has a major psychological impact.","للتوتر تأثير نفسي كبير."],
+["addictive","مسبب للإدمان (صفة - adj.)","Some video games can be very addictive.","بعض ألعاب الفيديو يمكن أن تكون مسببة للإدمان للغاية."],
+["boundary","حد / قاعدة (اسم - n.)","Parents need to set clear boundaries for children.","يحتاج الآباء وضع حدود واضحة للأطفال."],
+["interfere","يتدخل / يعيق (فعل - v.)","Don't let distractions interfere with your study.","لا تدع المشتتات تعيق دراستك."],
+["replicate","ينسخ / يحاكي (فعل - v.)","Scientists tried to replicate the experiment.","حاول العلماء محاكاة التجربة."],
+["anxiety","قلق (اسم - n.)","Exams often cause stress and anxiety.","غالباً ما تتسبب الامتحانات في التوتر والقلق."],
+["fulfilling","مشبع / مرضٍ (صفة - adj.)","Teaching is a very fulfilling job.","التدريس وظيفة مرضية ومجزية للغاية."],
+["mindful","واعٍ / منتبه (صفة - adj.)","Be mindful of your health and diet.","كن واعياً بصحتك ونظامك الغذائي."],
+["withdraw","ينسحب / يبتعد (فعل - v.)","He decided to withdraw from the competition.","قرر الانسحاب من المسابقة."],
+["achievement","إنجاز (اسم - n.)","Winning the award was a great achievement.","كان الفوز بالجائزة إنجازاً عظيماً."],
+["keep going","يستمر - يواصل (فعل مركب - phr. v.)","When things get hard, you must keep going.","عندما تصبح الأمور صعبة، يجب عليك الاستمرار."],
+["sense","شعور - إحساس (اسم - n.)","She felt a sense of relief after the exam.","شعرت بإحساس بالارتياح بعد الامتحان."],
+["shimmer","يلمع بخفوت (فعل/اسم - v-n.)","The stars began to shimmer in the night sky.","بدأت النجوم تلمع بخفوت في سماء الليل."],
+["struggle to keep up","يكافح لمجاراة الآخرين (تعبير - expr.)","He had to struggle to keep up with the fast class.","كان عليه أن يكافح لمجاراة الفصل السريع."],
+["insist","يصر (فعل - v.)","She insisted on paying for the coffee.","لقد أصرت على دفع ثمن القهوة."],
+["pedal stroke","ضغطة بدال (اسم - n.)","Each pedal stroke brought him closer to the finish line.","كل ضغطة بدال تقربه من خط النهاية."],
+["sense of achievement","شعور بالإنجاز (اسم - n.)","Finishing the project gave me a real sense of achievement.","منحني إنهاء المشروع شعوراً حقيقياً بالإنجاز."],
+["struggle","يكافح - يناضل (فعل - v.)","Students sometimes struggle with difficult subjects.","يكافح الطلاب أحياناً مع المواد الصعبة."],
+["wear on","يمضي ببطء (فعل مركب - phr. v.)","As the long day wore on, he became very tired.","مع مضي اليوم الطويل ببطء، أصبح متعباً للغاية."]
+]},
+{ id:"important_vocab", title:"المفردات الهامة (Important Vocab)", w:[
+["academic","دراسي (صفة - adj.)","He achieved great academic success.","لقد حقق نجاحاً دراسياً كبيراً."],
+["adulthood","سن الرشد (اسم - n.)","Responsibilities increase when you reach adulthood.","تزداد المسؤوليات عندما تبلغ سن الرشد."],
+["belonging","الشعور بالانتماء (اسم - n.)","Clubs give students a strong sense of belonging.","تمنح الأندية الطلاب شعوراً قوياً بالانتماء."],
+["cardiovascular","متعلق بالقلب والأوعية الدموية (صفة - adj.)","Running is great for cardiovascular health.","الجري رائع لصحة القلب والأوعية الدموية."],
+["competitiveness","التنافسية (اسم - n.)","Competitiveness helps athletes improve their skills.","تساعد التنافسية الرياضيين على تحسين مهاراتهم."],
+["conduct","يجري - ينفذ (فعل - v.)","Scientists conduct experiments in the lab.","يجري العلماء تجارب في المعمل."],
+["coordination","تناسق - تنسيق (اسم - n.)","Dancing requires good body coordination.","يتطلب الرقص تناسقاً جيداً للجسم."],
+["disengage","ينسحب (فعل - v.)","He decided to disengage from the argument.","قرر الانسحاب من النقاش."],
+["emotional regulation","تنظيم الانفعال (اسم - n.)","Emotional regulation is important for mental health.","تنظيم الانفعال مهم للصحة النفسية."],
+["expand","يوسع - يتمدد (فعل - v.)","Metal tends to expand when heated.","تميل المعادن للتمدد عندما تسخن."],
+["failure","فشل (اسم - n.)","Never let failure stop you from trying.","لا تدع الفشل يمنعك أبداً من المحاولة."],
+["academic pressure","ضغط أكاديمي (اسم - n.)","Many students suffer from academic pressure.","يعاني العديد من الطلاب من الضغط الأكاديمي."],
+["belong","ينتمي (فعل - v.)","These books belong to the school library.","تنتمي هذه الكتب لمكتبة المدرسة."],
+["beneficial","مفيد (صفة - adj.)","Eating vegetables is beneficial for health.","تناول الخضروات مفيد للصحة."],
+["competence","الكفاءة / القدرة (اسم - n.)","She showed great competence in her work.","لقد أظهرت كفاءة كبيرة في عملها."],
+["compulsory","إجباري (صفة - adj.)","English is a compulsory subject in school.","اللغة الإنجليزية مادة إجبارية في المدرسة."],
+["consistent","ثابت - منسق (صفة - adj.)","You need consistent effort to succeed.","تحتاج إلى جهد ثابت لكي تنجح."],
+["crisis","أزمة (اسم - n.)","The government handled the economic crisis well.","تعاملت الحكومة مع الأزمة الاقتصادية بشكل جيد."],
+["educator","مرب - معلم (اسم - n.)","A good educator inspires students.","المعلم الجيد يلهم الطلاب."],
+["endurance","قدرة على التحمل (اسم - n.)","Marathons require high physical endurance.","تتطلب سباقات الماراثون قدرة عالية على التحمل البدني."],
+["facility","مرفق - منشأة (اسم - n.)","The sports facility is open to all students.","المنشأة الرياضية مفتوحة لجميع الطلاب."],
+["fair chance","فرصة عادلة (اسم - n.)","Everyone deserves a fair chance in life.","يستحق الجميع فرصة عادلة في الحياة."],
+["foundation","قاعدة / أساس (اسم - n.)","Education forms a strong foundation for the future.","التعليم يشكل أساساً قوياً للمستقبل."],
+["gracefully","بروح رياضية / بكرامة (ظرف - adv.)","She accepted the defeat gracefully.","لقد تقبلت الهزيمة بروح رياضية."],
+["genuinely","بصدق / بحق (ظرف - adv.)","I am genuinely happy for your success.","أنا سعيد بحق من أجل نجاحك."],
+["harshly","بقسوة (ظرف - adv.)","The coach spoke harshly to the team.","تحدث المدرب بقسوة إلى الفريق."],
+["increasingly","بشكل متزايد (ظرف - adv.)","Technology is becoming increasingly important.","تصبح التكنولوجيا مهمة بشكل متزايد."],
+["leadership","قيادة (اسم - n.)","Good leadership is vital for a successful company.","القيادة الجيدة أمر حيوي لشركات ناجحة."],
+["lifestyle","نمط حياة (اسم - n.)","A healthy lifestyle includes good food and exercise.","يتضمن نمط الحياة الصحي طعاماً جيداً وتمرناً."],
+["mental well-being","رفاهية نفسية (اسم - n.)","Mental well-being affects our daily performance.","تؤثر الرفاهية النفسية على أدائنا اليومي."],
+["peak","قمة / أعلى مستوى (اسم - n.)","Athletes train hard to reach their physical peak.","يتدرّب الرياضيون بجد للوصول إلى ذروتهم البدنية."],
+["persevere","يثابر (فعل - v.)","You must persevere to achieve your goals.","يجب أن تثابر لتحقيق أهدافك."],
+["predictor","مؤشر تنبؤ (اسم - n.)","Hard work is a strong predictor of success.","العمل الجاد هو مؤشر قوي على النجاح."],
+["recommend","يوصي (فعل - v.)","I recommend reading this helpful book.","أوصي بقراءة هذا الكتاب المفيد."],
+["significant","مهم / كبير (صفة - adj.)","There was a significant change in weather.","كان هناك تغير كبير في الطقس."],
+["strength","قوة (اسم - n.)","Weightlifting builds muscle strength.","رفع الأثقال يبني قوة العضلات."],
+["teammate","زميل في الفريق (اسم - n.)","He passed the ball to his teammate.","مرر الكرّة لزميله في الفريق."],
+["healthy weight","وزن صحي (اسم - n.)","Eating right helps maintain a healthy weight.","الأكل الصحيح يساعد في الحفاظ على وزن صحي."],
+["intense","شديد / مكثف (صفة - adj.)","The players faced an intense training session.","واجه اللاعبون جلسة تدريب مكثفة."],
+["level","مستوى (اسم - n.)","He reached a high level in English.","لقد وصل إلى مستوى عالٍ في اللغة الإنجليزية."],
+["management","إدارة (اسم - n.)","Time management is a crucial skill.","إدارة الوقت مهارة حاسمة."],
+["opportunity","فرصة (اسم - n.)","Don't miss this great opportunity.","لا تفوت هذه الفرصة العظيمة."],
+["peer","نظير / زميل (اسم - n.)","Students learn a lot from their peers.","يتعلم الطلاب الكثير من أقرانهم."],
+["physical activity","نشاط بدني (اسم - n.)","Daily physical activity keeps you fit.","النشاط البدني اليومي يبقيك لائقاً."],
+["professional","مهني (صفة - adj.)","She handles her work in a professional way.","إنها تتعامل مع عملها بطريقة مهنية."],
+["resource","مورد (اسم - n.)","Water is our most precious resource.","الماء هو أثمن مواردنا."],
+["social","اجتماعي (صفة - adj.)","Humans are social creatures.","البشر كائنات اجتماعية."],
+["target","هدف (اسم - n.)","Our main target is to win the match.","هدفنا الأساسي هو الفوز بالمباراة."],
+["transfer","ينتقل / ينقل (فعل - v.)","He decided to transfer to another school.","قرر الانتقال إلى مدرسة أخرى."],
+["acknowledge","يدرك / يقرّ (فعل - v.)","She refused to acknowledge her mistake.","رفضت أن تقر بخطئها."],
+["average","متوسط (اسم - n.)","His grades are above the class average.","درجاته أعلى من متوسط الفصل."],
+["concerned","قلق / مهتم (صفة - adj.)","We are all concerned about his health.","نحن جميعا قلقون بشأن صحته."],
+["creative hobby","هواية إبداعية (اسم - n.)","Painting is a wonderful creative hobby.","الرسم هواية إبداعية رائعة."],
+["depression","اكتئاب (اسم - n.)","Loneliness can sometimes lead to depression.","الوحدة يمكن أن تؤدي أحياناً إلى الاكتئاب."],
+["entirely","تماماً / كلياً (ظرف - adv.)","I agree with you entirely.","أتفق معك تماماً."],
+["gain","يكتسب / يحصل على (فعل - v.)","Reading helps you gain new knowledge.","تساعدك القراءة على اكتساب معرفة جديدة."],
+["hand-eye coordination","التآزر البصري الحركي (اسم - n.)","Video games can improve hand-eye coordination.","يمكن لألعاب الفيديو تحسين التآزر البصري الحركي."],
+["appearance","مظهر (اسم - n.)","First impressions depend heavily on appearance.","الانطباعات الأولى تعتمد بشدة على المظهر."],
+["concentration","تركيز (اسم - n.)","Studying in a quiet room improves concentration.","الدراسة في غرفة هادئة تحسن التركيز."],
+["constant","مستمر (صفة - adj.)","Success requires constant effort.","النجاح يتطلب جهداً مستمراً."],
+["debate","جدال / مناظرة (اسم - n.)","The class had an interesting debate about technology.","أجرى الفصل مناقشة ممتعة حول التكنولوجيا."],
+["effect","تأثير / أثر (اسم - n.)","Exercise has a positive effect on the body.","للتمارين الرياضية تأثير إيجابي على الجسم."],
+["essential","أساسي / ضروري (صفة - adj.)","Water is essential for all living creatures.","الماء ضروري لجميع المخلوقات الحية."],
+["gaming disorder","اضطراب إدمان الألعاب (اسم - n.)","Excessive play can lead to a gaming disorder.","اللعب المفرط قد يؤدي إلى اضطراب إدمان الألعاب."],
+["harmful","ضار (صفة - adj.)","Smoking is extremely harmful to health.","التدخين ضار للغاية بالصحة."],
+["mental health","صحة نفسية (اسم - n.)","Mental health is just as important as physical health.","الصحة النفسية لا تقل أهمية عن الصحة البدنية."],
+["national study","دراسة وطنية (اسم - n.)","The government conducted a national study on education.","أجرت الحكومة دراسة وطنية حول التعليم."],
+["platform","منصة (اسم - n.)","Online learning platforms are very helpful for students.","منصات التعلم عبر الإنترنت مفيدة جداً للطلاب."],
+["real-world relationship","علاقة واقعية (اسم - n.)","It is important to build strong real-world relationships.","من المهم بناء علاقات واقعية قوية."],
+["report","تقرير / يذكر (اسم/فعل - v-n.)","The journalist wrote a detailed report about the event.","كتب الصحفي تقريراً مفصلاً عن الحدث."],
+["researcher","باحث (اسم - n.)","The researcher published a new scientific paper.","نشر الباحث بحثاً علمياً جديداً."],
+["screen time","وقت استخدام الشاشات (اسم - n.)","Parents should monitor their children's screen time.","يجب على الآباء مراقبة وقت استخدام أطفالهم للشاشات."],
+["self-esteem","تقدير الذات (اسم - n.)","Success helps build a student's self-esteem.","النجاح يساعد في بناء تقدير الذات لدى الطالب."],
+["sleep quality","جودة النوم (اسم - n.)","Good sleep quality is essential for brain function.","جودة النوم الجيدة ضرورية لوظائف الدماغ."],
+["spark","يثير / يطلق شرارة (فعل/اسم - v-n.)","The interesting lecture sparked a long debate.","أثارت المحاضرة الممتعة نقاشاً طويلاً."],
+["mood","مزاج (اسم - n.)","Listening to music can instantly improve your mood.","الاستماع إلى الموسيقى يمكن أن يحسن مزاجك فوراً."],
+["overestimate","يبالغ في تقدير (فعل - v.)","Never overestimate your opponent's weakness.","لا تبالغ أبداً في تقدير ضعف خصمك."],
+["problem-solving skill","مهارة حل المشكلات (اسم - n.)","Engineering teaches you strong problem-solving skills.","تعليم الهندسة يمنحك مهارات قوية في حل المشكلات."],
+["regarding","بخصوص / بشأن (حرف جر - prep.)","I have a question regarding the homework.","لدي سؤال بخصوص الواجب المدرسي."],
+["research report","تقرير بحثي (اسم - n.)","She submitted her research report on time.","لقد قدمت تقريرها البحثي في الوقت المحدد."],
+["restore","يستعيد (فعل - v.)","Sleeping well helps restore your energy.","النوم الجيد يساعد في استعادة طاقتك."],
+["screen-saturated","تسيطر عليه الشاشات (صفة - adj.)","We live in a screen-saturated modern world.","نحن نعيش في عالم حديث تسيطر عليه الشاشات."],
+["self-image","الصورة الذاتية (اسم - n.)","Positive feedback improves a child's self-image.","التعليقات الإيجابية تحسن الصورة الذاتية للطفل."],
+["socializing","تواصل / مخالطة اجتماعية (اسم - n.)","Face-to-face socializing is important for mental health.","التواصل الاجتماعي وجهاً لوجه مهم للصحة النفسية."],
+["worth","قيمة (اسم - n.)","Never doubt your own worth and abilities.","لا تشك أبداً في قيمتك وقدراتك الذاتية."],
+["ache","يؤلم - ألم (فعل/اسم - v-n.)","My legs began to ache after the long run.","بدأت ساقاي تؤلماني بعد الجري الطويل."],
+["afterwards","بعد ذلك (ظرف - adv.)","We had dinner and went for a walk afterwards.","تناولنا العشاء وذهبنا في نزهة بعد ذلك."],
+["breathing","التنفس (اسم - n.)","Deep breathing helps you relax.","التنفس العميق يساعدك على الاسترخاء."],
+["comfort","راحة (اسم - n.)","She likes the comfort of her own home.","إنها تحب راحة منزلها الخاص."],
+["considerably","بدرجة كبيرة (ظرف - adv.)","His English improved considerably this year.","تحسنت لغته الإنجليزية بدرجة كبيرة هذا العام."],
+["curtain","ستارة (اسم - n.)","Open the curtain to let the sunlight in.","افتح الستارة لتسمح لضوء الشمس بالدخول."],
+["defeat","هزيمة - يهزم (اسم/فعل - n-v.)","They accepted the defeat and promised to improve.","لقد تقبلوا الهزيمة ووعدوا بالتحسن."],
+["direct","مباشر - يوجه (صفة/فعل - adj-v.)","He gave me direct instructions for the task.","أعطاني تعليمات مباشرة للمهمة."],
+["effort","جهد (اسم - n.)","Passing the exam requires a lot of effort.","اجتياز الامتحان يتطلب جهداً كبيراً."],
+["experience","تجربة - يجرب (اسم/فعل - n-v.)","Travelling gives you a wonderful life experience.","السفر يمنحك تجربة حياة رائعة."],
+["admit","يعترف بـ (فعل - v.)","He had to admit that he made a mistake.","كان عليه أن يعترف بأنه ارتكب خطأ."],
+["bank","ضفة / جانب (اسم - n.)","They sat on the grassy river bank.","جلسوا على ضفة النهر العشبية."],
+["capable","قادر (صفة - adj.)","She is a very capable student.","إنها طالبة قادرة جداً (كفؤة)."],
+["complaint","شكوى (اسم - n.)","The manager listened to the customer's complaint.","استمع المدير إلى شكوى العميل."],
+["contribute to","يسهم في (فعل - v.)","Hard work can contribute greatly to your success.","يمكن للعمل الجاد أن يسهم بشكل كبير في نجاحك."],
+["dawn","الفجر (اسم - n.)","They started their journey at dawn.","بدؤوا رحلتهم عند الفجر."],
+["determined","مصمم / عازم (صفة - adj.)","He is determined to be the top of the republic.","إنه عازم على أن يكون الأول على الجمهورية."],
+["distance","مسافة (اسم - n.)","Cairo is at a long distance from Aswan.","القاهرة على مسافة بعيدة من أسوان."],
+["exhausted","منهك (صفة - adj.)","She was exhausted after studying all night.","كانت منهكة بعد الدراسة طوال الليل."],
+["focus","تركيز (اسم - n.)","Keep your focus on your main goal.","حافظ على تركيزك على هدفك الأساسي."],
+["fulfilled","راض وسعيد (صفة - adj.)","He felt fulfilled after helping others.","شعَر بالرضا والسعادة بعد مساعدة الآخرين."],
+["gentle","لطيف (صفة - adj.)","The teacher gave the student a gentle reminder.","أعطى المعلم الطالب تذكرة لطيفة."],
+["immediate","فوري - مباشر (صفة - adj.)","The medicine provided immediate relief.","قدم الدواء راحة فورية."],
+["leisure","وقت فراغ - ترفيه (اسم - n.)","Reading is my favorite leisure activity.","القراءة هي نشاطي الترفيهي المفضل."],
+["mental growth","نمو ذهني (اسم - n.)","Continuous learning supports mental growth.","التعلم المستمر يدعم النمو الذهني."],
+["navigate","يتنقل عبر - يجتاز (فعل - v.)","It is hard to navigate through difficult times.","من الصعب التنقل عبر الأوقات الصعبة."],
+["occasional","متقطع - بين الحين والآخر (صفة - adj.)","We only made occasional mistakes.","لقد ارتكبنا أخطاء متقطعة فقط."],
+["overcome","يتغلب على (فعل - v.)","You can overcome any challenge with hard work.","يمكنك التغلب على أي تحدٍ بالعمل الجاد."],
+["pride","كبرياء / فخر (اسم - n.)","He looked at his grades with pride.","نظر إلى درجاته بفخر."],
+["realise","يدرك (فعل - v.)","She didn't realise how late it was.","لم تدرك كم كان الوقت متأخراً."],
+["stillness","سكون (اسم - n.)","I love the stillness of the early morning.","أحب سكون الصباح الباكر."],
+["uneven","غير منتظم (صفة - adj.)","The road was uneven and rocky.","كانت الطريق غير منتظمة وصخرية."],
+["unwillingness","عدم رغبة (اسم - n.)","His unwillingness to cooperate caused a delay.","تسببت عدم رغبته في التعاون في حدوث تأخير."],
+["warm","دافئ (صفة - adj.)","Wear a coat to stay warm in winter.","ارتدي معطفاً لتبقى دافئاً في الشتاء."],
+["initial","أولي (صفة - adj.)","My initial thought was completely wrong.","كانت فكرتي الأولية خاطئة تماماً."],
+["meaningful","ذو معنى (صفة - adj.)","We had a meaningful conversation.","أجرينا محادثة ذات معنى."],
+["minor","طفيف / بسيط (صفة - adj.)","It was just a minor mistake.","لقد كان مجرد خطأ طفيف."],
+["obstacle","عقبة / عائق (اسم - n.)","You must face every obstacle bravely.","يجب عليك مواجهة كل عقبة بشجاعة."],
+["outdoors","في الخارج / في الهواء الطلق (ظرف - adv.)","Children love playing outdoors.","يحب الأطفال اللعب في الهواء الطلق."],
+["physical","بدني (صفة - adj.)","Regular physical exercise keeps you healthy.","التمارين البدنية المنتظمة تبقيك بصحة جيدة."],
+["rainstorm","عاصفة ممطرة (اسم - n.)","A sudden rainstorm ruined our picnic.","أفسدت عاصفة ممطرة مفاجئة نزهتنا."],
+["shade","ظل (اسم - n.)","We sat in the shade of a large tree.","جلسنا في ظل شجرة كبيرة."],
+["stressor","عامل ضغط (اسم - n.)","Exams are a major stressor for students.","الامتحانات تعد عامل ضغط رئيسي للطلاب."],
+["unexpected","غير متوقع (صفة - adj.)","The news came as an unexpected surprise.","جاءت الأخبار بمثابة مفاجأة غير متوقعة."],
+["view","منظر / منظور (اسم - n.)","The hotel room had a wonderful sea view.","كانت غرفة الفندق تتمتع بمنظر بحري رائع."]
+]}
+];
+
+const DATA = { sections: RAW.map(s => ({
+  id: s.id, title_ar: s.title,
+  words: s.w.map(a => ({ en:a[0], ar:a[1], en_sentence:a[2], ar_sentence:a[3] }))
+}))};
+
+/* ---------- Helpers ---------- */
+const $  = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];} return a; }
+function sample(arr,n,exclude){ return shuffle(arr.filter(x=>x!==exclude)).slice(0,n); }
+function normAr(s){ return s.toLowerCase().replace(/[\u064B-\u065F\u0670]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه'); }
+function wordsFor(id){
+  const secs = id==='all' ? DATA.sections : DATA.sections.filter(x=>x.id===id);
+  return secs.flatMap(s => s.words.map(w => ({...w, sec:s.title_ar})));
+}
+function filtered(){
+  const all = wordsFor(curSec);
+  const q = normAr(query.trim());
+  if(!q) return all;
+  return all.filter(w => normAr(w.en).includes(q) || normAr(w.ar).includes(q));
+}
+
+/* ---------- Theme ---------- */
+$('#theme').onclick = () => {
+  const root = document.documentElement;
+  const dark = root.getAttribute('data-theme') === 'dark' ||
+    (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+  const next = dark ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch(e){}
+  document.querySelector('meta[name=theme-color]').content = next === 'dark' ? '#0e0d1f' : '#4f46e5';
+};
+
+/* ---------- Speech ---------- */
+let availableVoices = [];
+function loadVoices() {
+  if ('speechSynthesis' in window) {
+    availableVoices = window.speechSynthesis.getVoices();
+  }
+}
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = loadVoices;
+  loadVoices();
+}
+
+function say(text, btn) {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US';
+    u.rate = 0.7; // سرعة واضحة ومناسبة للتعلم
+    u.pitch = 1.0;
+
+    // البحث عن صوت Google US English واختياره تلقائياً
+    if (availableVoices.length === 0) loadVoices();
+    const googleVoice = availableVoices.find(v => 
+      v.name.includes('Google US English') || 
+      (v.name.includes('Google') && v.lang.startsWith('en'))
+    );
+    
+    if (googleVoice) {
+      u.voice = googleVoice;
+    }
+
+    if (btn) { 
+      btn.classList.add('playing'); 
+      u.onend = u.onerror = () => btn.classList.remove('playing'); 
+    }
+
+    window.speechSynthesis.speak(u);
+  }
+}
+/* ---------- State ---------- */
+let curSec = 'all', query = '', view = 'cards';
+
+function renderFilters(){
+  const allCount = DATA.sections.reduce((n,s)=>n+s.words.length,0);
+  const fs = [{id:'all',label:'الكل',c:allCount}, ...DATA.sections.map(s=>({id:s.id,label:s.title_ar,c:s.words.length}))];
+  $('#filters').innerHTML = fs.map(f => `<button class="chip ${f.id===curSec?'active':''}" data-id="${f.id}">${f.label}<span class="c">${f.c}</span></button>`).join('');
+  $$('#filters .chip').forEach(b => b.onclick = () => { curSec = b.dataset.id; renderFilters(); refreshAll(); });
+}
+function refreshAll(){ initDeck(); renderList(); initQuiz(); }
+
+/* ---------- Tabs ---------- */
+function setView(v){
+  view = v;
+  $$('.tab').forEach(t => t.classList.toggle('active', t.dataset.view === v));
+  ['cards','quiz','list'].forEach(n => $('#v-'+n).classList.toggle('hidden', n !== v));
+  $('#searchBox').classList.toggle('hidden', v === 'quiz');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+$$('.tab').forEach(t => t.onclick = () => setView(t.dataset.view));
+
+/* ---------- Search ---------- */
+let qTimer;
+$('#q').addEventListener('input', e => {
+  query = e.target.value;
+  $('#qclear').classList.toggle('show', !!query);
+  clearTimeout(qTimer);
+  qTimer = setTimeout(() => { initDeck(); renderList(); }, 80);
+});
+$('#qclear').onclick = () => { $('#q').value=''; query=''; $('#qclear').classList.remove('show'); initDeck(); renderList(); $('#q').focus(); };
+
+/* ---------- Flashcards ---------- */
+let deck = [], di = 0, known = new Set(), flipTimer;
+function initDeck(startEn){
+  const pool = filtered();
+  deck = query.trim() || startEn ? pool : shuffle(pool);
+  di = startEn ? Math.max(0, deck.findIndex(w => w.en === startEn)) : 0;
+  known = new Set();
+  $('#fcount').textContent = deck.length;
+  const has = deck.length > 0;
+  $('#deckWrap').classList.toggle('hidden', !has);
+  $('#emptyCards').classList.toggle('hidden', has);
+  if(has) renderCard(0); else { $('#fpos').textContent = 0; $('#fbar').style.width = '0%'; $('#fknown').textContent = 0; }
+}
+function fillCard(){
+  const w = deck[di]; if(!w) return;
+  $('#ftag').textContent = w.sec; $('#btag').textContent = w.sec;
+  $('#fword').textContent = w.en; $('#bmean').textContent = w.ar;
+  $('#bsen').textContent = w.en_sentence; $('#bsar').textContent = w.ar_sentence;
+}
+function renderCard(dir){
+  const c = $('#fcard'), st = $('#stage');
+  clearTimeout(flipTimer);
+  const wasFlipped = c.classList.contains('flip') || c.classList.contains('on');
+  c.classList.remove('on');
+  const apply = () => {
+    fillCard();
+    st.classList.remove('pop','sl'); void st.offsetWidth;
+    if(dir !== 0){ st.classList.add('pop'); if(dir < 0) st.classList.add('sl'); }
+  };
+  if(wasFlipped && dir !== 0) flipTimer = setTimeout(apply, 260); else apply();
+  $('#fpos').textContent = Math.min(di+1, deck.length);
+  $('#fknown').textContent = known.size;
+  $('#fbar').style.width = (deck.length ? (known.size / deck.length * 100) : 0) + '%';
+}
+function go(d){
+  const n = di + d;
+  if(n < 0 || n >= deck.length) return;
+  di = n; renderCard(d);
+}
+$('#fcard').onclick = e => {
+  if(e.target.closest('.spk')) return;
+  const c = $('#fcard'); c.classList.toggle('on');
+  if(c.classList.contains('on')) say(deck[di].en);
+};
+$('#fcard').onkeydown = e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); $('#fcard').click(); } };
+$('#fspk').onclick = e => { e.stopPropagation(); say(deck[di].en, e.currentTarget); };
+$('#bspk').onclick = e => { e.stopPropagation(); say(deck[di].en_sentence, e.currentTarget); };
+$('#next').onclick = () => go(1);
+$('#prev').onclick = () => go(-1);
+$('#shuffle').onclick = () => { deck = shuffle(deck); di = 0; known = new Set(); renderCard(1); };
+$('#cKnow').onclick = () => { known.add(deck[di].en); if(di < deck.length-1){ di++; renderCard(1); } else renderCard(0); };
+$('#cAgain').onclick = () => { deck.push(deck[di]); $('#fcount').textContent = deck.length; if(di < deck.length-1){ di++; renderCard(1); } };
+
+let tx = 0, ty = 0;
+$('#stage').addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, {passive:true});
+$('#stage').addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+  if(Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) go(dx < 0 ? 1 : -1);
+}, {passive:true});
+
+/* ---------- Word list ---------- */
+function hl(text, q){
+  if(!q) return esc(text);
+  const i = text.toLowerCase().indexOf(q.toLowerCase());
+  if(i < 0) return esc(text);
+  return esc(text.slice(0,i)) + '<mark>' + esc(text.slice(i,i+q.length)) + '</mark>' + esc(text.slice(i+q.length));
+}
+function renderList(){
+  const pool = filtered(), q = query.trim();
+  $('#lcount').textContent = pool.length;
+  $('#emptyList').classList.toggle('hidden', pool.length > 0);
+  $('#list').innerHTML = pool.map((w,i) => `
+    <div class="row" data-i="${i}" role="button" tabindex="0">
+      <div class="t"><div class="e en">${hl(w.en,q)}</div><div class="a">${hl(w.ar,q)}</div></div>
+      <button class="spk" data-say="${i}" aria-label="نطق ${esc(w.en)}"><svg class="ico"><use href="#i-spk"/></svg></button>
+    </div>`).join('');
+  $$('#list .row').forEach(r => {
+    const w = pool[+r.dataset.i];
+    r.onclick = e => {
+      if(e.target.closest('.spk')){ say(w.en, e.target.closest('.spk')); return; }
+      initDeck(w.en); setView('cards');
+    };
+    r.onkeydown = e => { if(e.key==='Enter'){ r.click(); } };
+  });
+}
+
+/* ---------- Quiz ---------- */
+let queue = [], qi = 0, score = 0, streak = 0, answered = false;
+const TYPES = ['meaning','reverse','cloze'];
+const quizList = () => wordsFor(curSec);
+
+function makeCloze(w){
+  const toks = w.en_sentence.split(/(\s+)/), lw = w.en.toLowerCase();
+  for(let i=0;i<toks.length;i++){
+    const clean = toks[i].replace(/[^A-Za-z']/g,'').toLowerCase();
+    if(clean.length >= 2 && clean.startsWith(lw)) return toks.map((t,j)=> j===i ? t.replace(/[A-Za-z']+/g,'____') : t).join('');
+  }
+  return w.en_sentence.replace(new RegExp(w.en,'gi'),'____');
+}
+function opts(w, list, key, isEn){ return shuffle([w, ...sample(list,3,w)]).map(x => ({t:x[key], en:isEn, ok:x===w})); }
+function buildQ(list){
+  const w = list[Math.random()*list.length|0];
+  const t = TYPES[Math.random()*TYPES.length|0];
+  if(t==='meaning') return {label:'اختر المعنى الصحيح', text:`ما معنى: <span class="en">${esc(w.en)}</span>`, sub:'', options:opts(w,list,'ar',false), en:w.en};
+  if(t==='reverse') return {label:'اختر الكلمة الإنجليزية', text:`ما الكلمة الإنجليزية لـ: ${esc(w.ar)}`, sub:'', options:opts(w,list,'en',true), en:w.en};
+  return {label:'أكمل الجملة بالكلمة الصحيحة', text:`<span class="en">${esc(makeCloze(w))}</span>`, sub:'الترجمة: '+w.ar_sentence, options:opts(w,list,'en',true), en:w.en};
+}
+function initQuiz(){
+  const list = quizList(), total = Math.min(10, list.length);
+  queue = []; for(let i=0;i<total;i++) queue.push(buildQ(list));
+  qi = 0; score = 0; streak = 0;
+  $('#sc').textContent = 0; $('#streak').textContent = 0;
+  $('#done').classList.add('hidden'); $('#quiz').classList.remove('hidden');
+  renderQ();
+}
+function renderQ(){
+  answered = false;
+  const q = queue[qi];
+  $('#qbar').style.width = (qi / queue.length * 100) + '%';
+  $('#qtype').textContent = q.label;
+  $('#qtext').innerHTML = q.text;
+  $('#qsub').textContent = q.sub; $('#qsub').style.display = q.sub ? 'block' : 'none';
+  $('#fb').className = 'sheet';
+  $('#opts').innerHTML = q.options.map((o,i)=>`<button class="opt" data-i="${i}">${o.en ? '<span class="en">'+esc(o.t)+'</span>' : esc(o.t)}</button>`).join('');
+  $$('#opts .opt').forEach(b => b.onclick = () => choose(b, q));
+}
+function choose(btn, q){
+  if(answered) return; answered = true;
+  const i = +btn.dataset.i, ok = q.options[i].ok;
+  $$('#opts .opt').forEach((b,j) => {
+    b.classList.add('locked');
+    if(q.options[j].ok) b.classList.add('correct'); else if(j===i) b.classList.add('wrong'); else b.classList.add('dim');
+  });
+  const fb = $('#fb');
+  if(ok){
+    score++; streak++;
+    fb.className = 'sheet good show';
+    $('#fbmsg').innerHTML = '✓ ممتاز! إجابة صحيحة';
+  } else {
+    streak = 0;
+    const right = q.options.find(o=>o.ok);
+    fb.className = 'sheet bad show';
+    $('#fbmsg').innerHTML = '✗ الإجابة الصحيحة:<small>' + (right.en ? '<span class="en">'+esc(right.t)+'</span>' : esc(right.t)) + '</small>';
+    queue.push(buildQ(quizList()));
+  }
+  $('#sc').textContent = score; $('#streak').textContent = streak;
+  if(navigator.vibrate) navigator.vibrate(ok ? 15 : [40,40,40]);
+  say(q.en);
+  fb.scrollIntoView({behavior:'smooth', block:'center'});
+}
+$('#qNext').onclick = () => { qi++; if(qi >= queue.length) finishQuiz(); else renderQ(); };
+$('#restart').onclick = initQuiz;
+function finishQuiz(){
+  $('#qbar').style.width = '100%';
+  $('#quiz').classList.add('hidden'); $('#done').classList.remove('hidden');
+  const pct = Math.round(score / queue.length * 100);
+  $('#ring').style.setProperty('--v', pct); $('#pct').textContent = pct + '%';
+  $('#doneTitle').textContent = pct >= 80 ? 'أداء رائع! 🎉' : 'أنهيت التمارين!';
+  $('#doneMsg').textContent = `أجبت بشكل صحيح على ${score} من أصل ${queue.length}. ${pct >= 80 ? 'مستوى ممتاز، استمر!' : 'واصل التمرين وستتحسن بسرعة!'}`;
+}
+
+/* ---------- Init ---------- */
+renderFilters();
+refreshAll();
+</script>
+</body>
+</html>
