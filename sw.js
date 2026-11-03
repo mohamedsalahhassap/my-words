@@ -2,7 +2,8 @@ const CACHE_NAME = 'words-app-v1';
 const ASSETS = [
   './',
   './index.html',
-  './manifest.json'
+  './manifest.json',
+  './sw.js'         
 ];
 
 self.addEventListener('install', (e) => {
