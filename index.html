@@ -484,10 +484,9 @@ mark{background:rgba(250,204,21,.4);color:inherit;border-radius:4px;padding:0 2p
     <button class="tab" data-view="quiz"><svg class="ico"><use href="#i-game"/></svg>التمارين</button>
     <button class="tab" data-view="list"><svg class="ico"><use href="#i-list"/></svg>الكلمات</button>
   </nav>
-  <div class="ad">
+  <div id="ad-banner" class="ad">
     <!-- ضع كود الإعلان (AdSense / AdMob web / أي شبكة) داخل الحاوية التالية -->
-    <div id="ad-banner"><small>إعلان</small> مساحة إعلانية 320×50</div>
-  </div>
+    <div><small>إعلان</small> مساحة إعلانية 50x320</div>  </div>
 </div>
 
 <script>
@@ -945,6 +944,26 @@ if(isIOS && !isStandalone){
 /* ---------- Init ---------- */
 renderFilters();
 refreshAll();
+
+// فحص حالة الاتصال بالإنترنت لإظهار/إخفاء الإعلان تلقائياً
+function checkNetworkStatus() {
+  const adBox = document.getElementById('ad-banner');
+  if (adBox) {
+    if (navigator.onLine) {
+      adBox.style.display = 'block'; // إظهار الإعلان عند وجود نت
+    } else {
+      adBox.style.display = 'none';  // إخفاء الإعلان أوفلاين
+    }
+  }
+}
+
+// الاستماع لتغيرات الشبكة
+window.addEventListener('online', checkNetworkStatus);
+window.addEventListener('offline', checkNetworkStatus);
+
+// تشغيل الفحص فور فتح الصفحة
+checkNetworkStatus();
 </script>
+
 </body>
 </html>
