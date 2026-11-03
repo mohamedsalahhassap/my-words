@@ -1,6 +1,7 @@
 {
-  "name": "تطبيق المفردات | دليلك",
-  "short_name": "المفردات",
+  "name": "Lexi - ليكسي",
+"short_name": "Lexi",
+"theme_color": "#4f46e5"
   "description": "تطبيق تفاعلي للتدريب على كلمات الإنجليزية بالصوت والجمل",
   "start_url": "./index.html",
   "display": "standalone",
