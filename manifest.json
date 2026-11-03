@@ -1,25 +1,21 @@
 {
   "name": "Lexi - ليكسي",
-"short_name": "Lexi",
-"theme_color": "#4f46e5"
-  "description": "تطبيق تفاعلي للتدريب على كلمات الإنجليزية بالصوت والجمل",
+  "short_name": "Lexi",
+  "description": "تعلّم مفردات الإنجليزية بالبطاقات والتمارين والنطق",
+  "lang": "ar",
+  "dir": "rtl",
   "start_url": "./index.html",
+  "scope": "./",
+  "id": "./index.html",
   "display": "standalone",
-  "background_color": "#007F7D",
-  "theme_color": "#007F7D",
   "orientation": "portrait",
+  "background_color": "#0e0d1f",
+  "theme_color": "#4f46e5",
+  "categories": ["education"],
   "icons": [
-    {
-      "src": "https://dalilk.com/assets/images/logos/black.svg",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "https://dalilk.com/assets/images/logos/black.svg",
-      "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }

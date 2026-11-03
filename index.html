@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js');
@@ -250,6 +251,19 @@ mark{background:rgba(250,204,21,.4);color:inherit;border-radius:4px;padding:0 2p
   box-shadow:0 6px 14px rgba(37,211,102,.35);text-decoration:none}
 .wa-top svg{width:22px;height:22px;fill:currentColor}
 .top-act{display:flex;gap:8px}
+/* install banner */
+.install{position:fixed;inset-inline:12px;z-index:40;max-width:calc(var(--w) - 24px);margin-inline:auto;
+  bottom:calc(var(--nav-h) + var(--ad-h) + env(safe-area-inset-bottom,0px) + 12px);
+  display:none;align-items:center;gap:12px;padding:14px;border-radius:22px;
+  background:var(--solid);border:1px solid var(--line);box-shadow:0 16px 40px rgba(40,30,120,.28)}
+.install.show{display:flex;animation:up .4s cubic-bezier(.3,1.4,.5,1)}
+.install .i-logo{width:46px;height:46px;border-radius:14px;flex:none;background:var(--grad);display:grid;place-items:center;color:#fff;font:800 24px 'Inter',sans-serif}
+.install .i-txt{flex:1;min-width:0}
+.install b{display:block;font-size:15px;font-weight:800}
+.install small{display:block;font-size:12.5px;color:var(--muted);line-height:1.5}
+.install .i-go{height:42px;padding:0 18px;border-radius:13px;background:var(--grad);color:#fff;font-weight:800;font-size:14px;flex:none}
+.install .i-x{width:34px;height:34px;border-radius:50%;background:var(--bg2);color:var(--muted);display:grid;place-items:center;flex:none}
+.install .i-x svg{width:15px;height:15px}
 
 /* ---------- Responsive: tablet & laptop ---------- */
 @media (min-width:768px){
@@ -454,6 +468,16 @@ mark{background:rgba(250,204,21,.4);color:inherit;border-radius:4px;padding:0 2p
 </div>
 
 <!-- Bottom dock: tabs + ad banner -->
+<div class="install" id="install" role="dialog" aria-label="تثبيت التطبيق">
+  <div class="i-logo">L</div>
+  <div class="i-txt">
+    <b>ثبّت Lexi على جهازك</b>
+    <small id="installTxt">افتحه بسرعة من الشاشة الرئيسية، وبيشتغل من غير إنترنت.</small>
+  </div>
+  <button class="i-go" id="installBtn">تثبيت</button>
+  <button class="i-x" id="installX" aria-label="إغلاق"><svg class="ico"><use href="#i-x"/></svg></button>
+</div>
+
 <div class="dock">
   <nav class="tabs" aria-label="التنقل">
     <button class="tab active" data-view="cards"><svg class="ico"><use href="#i-cards"/></svg>البطاقات</button>
@@ -893,7 +917,31 @@ function finishQuiz(){
   $('#doneTitle').textContent = pct >= 80 ? 'أداء رائع! 🎉' : 'أنهيت التمارين!';
   $('#doneMsg').textContent = `أجبت بشكل صحيح على ${score} من أصل ${queue.length}. ${pct >= 80 ? 'مستوى ممتاز، استمر!' : 'واصل التمرين وستتحسن بسرعة!'}`;
 }
-
+/* ---------- Install (PWA) ---------- */
+let deferredPrompt = null;
+const isStandalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+function snoozed(){ try { return Date.now() < +(localStorage.getItem('installSnooze') || 0); } catch(e){ return false; } }
+function showInstall(){ if(!isStandalone && !snoozed()) $('#install').classList.add('show'); }
+function hideInstall(days){
+  $('#install').classList.remove('show');
+  try { localStorage.setItem('installSnooze', Date.now() + days * 864e5); } catch(e){}
+}
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; showInstall(); });
+window.addEventListener('appinstalled', () => hideInstall(365));
+$('#installBtn').onclick = async () => {
+  if(!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const r = await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  hideInstall(r.outcome === 'accepted' ? 365 : 3);
+};
+$('#installX').onclick = () => hideInstall(3);
+if(isIOS && !isStandalone){
+  $('#installBtn').classList.add('hidden');
+  $('#installTxt').textContent = 'دوس على زر المشاركة ⬆️ في سفاري، وبعدين "إضافة إلى الشاشة الرئيسية".';
+  setTimeout(showInstall, 1500);
+}
 /* ---------- Init ---------- */
 renderFilters();
 refreshAll();
