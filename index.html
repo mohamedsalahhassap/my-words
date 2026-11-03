@@ -9,7 +9,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Lexi">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234f46e5'/%3E%3Cstop offset='1' stop-color='%237c3aed'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='url(%23g)'/%3E%3Cpath d='M23 15v27a5 5 0 0 0 5 5h15' fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='43' cy='21' r='5' fill='%232dd4bf'/%3E%3C/svg%3E"><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234f46e5'/%3E%3Cstop offset='1' stop-color='%237c3aed'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='url(%23g)'/%3E%3Cpath d='M23 15v27a5 5 0 0 0 5 5h15' fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='43' cy='21' r='5' fill='%232dd4bf'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="manifest" href="./manifest.json">
@@ -30,7 +31,7 @@
   --grad:linear-gradient(135deg,#4f46e5,#7c3aed);
   --card-front:linear-gradient(160deg,#ffffff,#f1edff);
   --card-back:linear-gradient(160deg,#4f46e5,#7c3aed 70%,#9333ea);
-  --nav-h:62px; --ad-h:56px; --w:560px;
+  --nav-h:62px; --ad-h:64px; --w:560px;
 }
 :root[data-theme="dark"]{
   --bg:#0e0d1f; --bg2:#17152e; --surface:rgba(30,28,60,.72); --solid:#1c1a38;
@@ -65,7 +66,7 @@ body{
   padding-bottom:calc(var(--nav-h) + var(--ad-h) + env(safe-area-inset-bottom,0px) + 18px);
 }
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;padding:0}
-button:focus-visible,input:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
 .en{direction:ltr;unicode-bidi:isolate;font-family:'Inter','Tajawal',sans-serif}
 .ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .hidden{display:none!important}
@@ -77,9 +78,8 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--teal);outline-o
   background:linear-gradient(var(--bg) 70%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .top-in{max-width:var(--w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:flex;align-items:center;gap:11px}
-.logo{width:42px;height:42px;border-radius:14px;background:var(--grad);display:grid;place-items:center;color:#fff;
-  box-shadow:0 8px 18px rgba(79,70,229,.35);font-weight:800;font-size:20px}
-.brand h1{margin:0;font-size:20px;font-weight:800;line-height:1.1}
+.logo{width:44px;height:44px;flex:none;filter:drop-shadow(0 8px 14px rgba(79,70,229,.35))}
+.brand h1{margin:0;font-size:20px;font-weight:800;line-height:1.1;letter-spacing:-.3px}
 .brand p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
 .icon-btn{width:42px;height:42px;border-radius:14px;background:var(--surface);border:1px solid var(--line);
   display:grid;place-items:center;box-shadow:var(--shadow-s);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
@@ -96,11 +96,23 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--teal);outline-o
 .chip.active{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(79,70,229,.35)}
 .chip.active .c{color:rgba(255,255,255,.8)}
 
+/* unit / lesson filter */
+.ulbar{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:2px 0 12px}
+.sel{position:relative;display:block}
+.sel span{position:absolute;top:8px;inset-inline-start:14px;font-size:11px;font-weight:700;color:var(--muted);pointer-events:none}
+.sel select{width:100%;height:58px;padding:22px 14px 4px;border-radius:16px;border:1px solid var(--line);
+  background-color:var(--surface);color:var(--ink);font:inherit;font-weight:700;font-size:16px;
+  -webkit-appearance:none;appearance:none;cursor:pointer;box-shadow:var(--shadow-s);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b89a8' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:left 14px center;background-size:16px}
+.sel select option{background:var(--solid);color:var(--ink)}
+
 /* search */
 .search{position:relative;margin:2px 0 14px}
 .search .ico{position:absolute;inset-inline-start:15px;top:50%;transform:translateY(-50%);color:var(--muted);width:20px;height:20px}
 .search input{width:100%;height:50px;border-radius:16px;border:1px solid var(--line);background:var(--surface);color:var(--ink);
-  font:inherit;font-size:15.5px;padding:0 46px;box-shadow:var(--shadow-s);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  font:inherit;font-size:16px;padding:0 46px;box-shadow:var(--shadow-s);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .search input::placeholder{color:var(--muted)}
 .search .clear{position:absolute;inset-inline-end:10px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;
   background:var(--bg2);display:none;place-items:center;color:var(--muted)}
@@ -230,10 +242,8 @@ mark{background:rgba(250,204,21,.4);color:inherit;border-radius:4px;padding:0 2p
 .tab.active{color:var(--p1)}
 .tab.active .ico{transform:translateY(-2px) scale(1.12)}
 .tab.active::before{content:"";position:absolute;top:0;width:28px;height:4px;border-radius:0 0 6px 6px;background:var(--grad)}
-.ad{height:var(--ad-h);margin:0 auto;max-width:var(--w);padding:6px 12px 8px}
-#ad-banner{height:100%;border:1.5px dashed var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;
-  gap:8px;font-size:12px;color:var(--muted);font-weight:600;background:rgba(127,127,170,.06);overflow:hidden}
-#ad-banner small{font-size:10px;padding:1px 6px;border-radius:5px;background:var(--bg2)}
+.ad{height:var(--ad-h);margin:0 auto;max-width:var(--w);padding:7px 12px}
+#ad-banner{height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden}
 
 /* contact */
 .contact{margin-top:26px;padding:22px 18px;border-radius:26px;text-align:center;background:var(--surface);border:1px solid var(--line);
@@ -251,6 +261,7 @@ mark{background:rgba(250,204,21,.4);color:inherit;border-radius:4px;padding:0 2p
   box-shadow:0 6px 14px rgba(37,211,102,.35);text-decoration:none}
 .wa-top svg{width:22px;height:22px;fill:currentColor}
 .top-act{display:flex;gap:8px}
+
 /* install banner */
 .install{position:fixed;inset-inline:12px;z-index:40;max-width:calc(var(--w) - 24px);margin-inline:auto;
   bottom:calc(var(--nav-h) + var(--ad-h) + env(safe-area-inset-bottom,0px) + 12px);
@@ -267,7 +278,7 @@ mark{background:rgba(250,204,21,.4);color:inherit;border-radius:4px;padding:0 2p
 
 /* ---------- Responsive: tablet & laptop ---------- */
 @media (min-width:768px){
-  :root{--w:760px;--nav-h:68px;--ad-h:64px}
+  :root{--w:760px;--nav-h:68px}
   .app{padding:0 24px}
   .top{padding-inline:24px}
   .chips{padding-inline:24px;margin-inline:-24px;flex-wrap:wrap;overflow:visible}
@@ -304,7 +315,7 @@ mark{background:rgba(250,204,21,.4);color:inherit;border-radius:4px;padding:0 2p
   .spk{margin-top:12px;width:56px;height:56px}
   .hint{display:none}
   .word{font-size:36px}
-  :root{--nav-h:52px;--ad-h:50px}
+  :root{--nav-h:52px}
   .tab{flex-direction:row;gap:6px;font-size:12px}
 }
 
@@ -331,37 +342,48 @@ mark{background:rgba(250,204,21,.4);color:inherit;border-radius:4px;padding:0 2p
 
 <header class="top">
   <div class="top-in">
-  <div class="brand">
-  <svg class="logo" viewBox="0 0 64 64" role="img" aria-label="Lexi">
-    <defs>
-      <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#4f46e5"/>
-        <stop offset="1" stop-color="#7c3aed"/>
-      </linearGradient>
-    </defs>
-    <rect width="64" height="64" rx="18" fill="url(#lg)"/>
-    <path d="M23 15v27a5 5 0 0 0 5 5h15" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="43" cy="21" r="5" fill="#2dd4bf"/>
-  </svg>
-  <div>
-    <h1 class="en">Lexi</h1>
-    <p>ليكسي · تعلّم، اسمع، وتمرّن</p>
-  </div>
-</div>
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 64 64" role="img" aria-label="Lexi">
+        <defs>
+          <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#4f46e5"/>
+            <stop offset="1" stop-color="#7c3aed"/>
+          </linearGradient>
+        </defs>
+        <rect width="64" height="64" rx="18" fill="url(#lg)"/>
+        <path d="M23 15v27a5 5 0 0 0 5 5h15" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="43" cy="21" r="5" fill="#2dd4bf"/>
+      </svg>
+      <div>
+        <h1 class="en">Lexi</h1>
+        <p>ليكسي · تعلّم، اسمع، وتمرّن</p>
+      </div>
+    </div>
     <div class="top-act">
-  <a class="wa-top" href="https://wa.me/201067582837?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%D8%8C%20%D8%B9%D9%86%D8%AF%D9%8A%20%D8%B3%D8%A4%D8%A7%D9%84%20%D8%B9%D9%86%20Lexi" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
-    <svg><use href="#i-wa"/></svg>
-  </a>
-  <button class="icon-btn" id="theme" aria-label="تبديل الوضع الليلي">
-    <svg class="ico moon"><use href="#i-moon"/></svg>
-    <svg class="ico sun"><use href="#i-sun"/></svg>
-  </button>
-</div>
+      <a class="wa-top" href="https://wa.me/201067582837?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%D8%8C%20%D8%B9%D9%86%D8%AF%D9%8A%20%D8%B3%D8%A4%D8%A7%D9%84%20%D8%B9%D9%86%20Lexi" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+        <svg><use href="#i-wa"/></svg>
+      </a>
+      <button class="icon-btn" id="theme" aria-label="تبديل الوضع الليلي">
+        <svg class="ico moon"><use href="#i-moon"/></svg>
+        <svg class="ico sun"><use href="#i-sun"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
 <div class="app">
-  <div class="chips" id="filters"></div>
+
+  <!-- فلتر الوحدة والدرس -->
+  <div class="ulbar">
+    <label class="sel">
+      <span>الوحدة</span>
+      <select id="selUnit" aria-label="اختيار الوحدة"></select>
+    </label>
+    <label class="sel">
+      <span>الدرس</span>
+      <select id="selLesson" aria-label="اختيار الدرس"></select>
+    </label>
+  </div>
 
   <div class="search" id="searchBox">
     <svg class="ico"><use href="#i-search"/></svg>
@@ -414,7 +436,7 @@ mark{background:rgba(250,204,21,.4);color:inherit;border-radius:4px;padding:0 2p
     <div class="empty hidden" id="emptyCards">
       <div class="big">🔍</div>
       <h3>ما لقينا نتائج</h3>
-      <div>جرّب كلمة أخرى أو امسح البحث.</div>
+      <div>جرّب كلمة أخرى أو غيّر الوحدة والدرس أو امسح البحث.</div>
     </div>
   </section>
 
@@ -454,20 +476,21 @@ mark{background:rgba(250,204,21,.4);color:inherit;border-radius:4px;padding:0 2p
     <div class="empty hidden" id="emptyList">
       <div class="big">🔍</div>
       <h3>ما لقينا نتائج</h3>
-      <div>جرّب كلمة أخرى أو امسح البحث.</div>
+      <div>جرّب كلمة أخرى أو غيّر الوحدة والدرس أو امسح البحث.</div>
     </div>
-     <div class="contact">
+    <div class="contact">
       <h3>تواصل معي</h3>
       <p>أنا Mohamed salah، لو عندك اقتراح أو واجهتك مشكلة كلمني.</p>
       <div class="c-links">
         <a class="c-btn wa" href="https://wa.me/201067582837" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>واتساب</a>
         <a class="c-btn fb" href="https://www.facebook.com/share/1JHfnczLXr/" target="_blank" rel="noopener"><svg><use href="#i-fb"/></svg>فيسبوك</a>
       </div>
+      <p style="margin:16px 0 0;font-size:13px"><a href="./privacy.html" style="color:var(--p1);font-weight:700">سياسة الخصوصية</a></p>
     </div>
   </section>
 </div>
 
-<!-- Bottom dock: tabs + ad banner -->
+<!-- بانر تثبيت التطبيق -->
 <div class="install" id="install" role="dialog" aria-label="تثبيت التطبيق">
   <div class="i-logo">L</div>
   <div class="i-txt">
@@ -478,15 +501,17 @@ mark{background:rgba(250,204,21,.4);color:inherit;border-radius:4px;padding:0 2p
   <button class="i-x" id="installX" aria-label="إغلاق"><svg class="ico"><use href="#i-x"/></svg></button>
 </div>
 
+<!-- Bottom dock: tabs + ad banner -->
 <div class="dock">
   <nav class="tabs" aria-label="التنقل">
     <button class="tab active" data-view="cards"><svg class="ico"><use href="#i-cards"/></svg>البطاقات</button>
     <button class="tab" data-view="quiz"><svg class="ico"><use href="#i-game"/></svg>التمارين</button>
     <button class="tab" data-view="list"><svg class="ico"><use href="#i-list"/></svg>الكلمات</button>
   </nav>
-  <div id="ad-banner" class="ad">
-    <!-- ضع كود الإعلان (AdSense / AdMob web / أي شبكة) داخل الحاوية التالية -->
-    <div><script>
+  <div class="ad">
+    <div id="ad-banner">
+      <!-- كود Adsterra -->
+      <div><script>
   atOptions = {
     'key' : '378aa38c0aa68b09e8738f4448f333bb',
     'format' : 'iframe',
@@ -495,19 +520,285 @@ mark{background:rgba(250,204,21,.4);color:inherit;border-radius:4px;padding:0 2p
     'params' : {}
   };
 </script>
-<script src="https://bauval.org/22/378aa38c0aa68b09e8738f4448f333bb"></script></div>  </div>
+<script src="https://bauval.org/22/378aa38c0aa68b09e8738f4448f333bb"></script></div>
+    </div>
+  </div>
 </div>
 
 <script>
-/* صيغة الكلمة: [الإنجليزية، العربية، الجملة بالإنجليزية، الجملة بالعربية] */
+/* أسماء الأقسام (الكلمات نفسها اتنقلت للوحدات U1 و U2 تحت) */
 const RAW = [
-{ id:"key_vocab", title:"الكلمات الرئيسية (Key Vocab)", w:[
-["access","إمكانية الوصول والاستفادة (اسم - n.)","Students have free access to the library.","لدى الطلاب إمكانية الوصول المجاني إلى المكتبة."],
-["enjoyment","استمتاع (اسم - n.)","Reading brings me a lot of enjoyment.","القراءة تجلب لي الكثير من الاستمتاع."],
-["life skill","مهارة حياتية (اسم - n.)","Communication is an essential life skill.","التواصل مهارة حياتية أساسية."],
-["competitive","تنافسي (صفة - adj.)","The job market is very competitive today.","سوق العمل تنافسي للغاية اليوم."],
-["inactive","غير نشيط - خامل (صفة - adj.)","An inactive lifestyle can lead to health problems.","أسلوب الحياة غير النشيط يمكن أن يؤدي إلى مشاكل صحية."],
-["psychological","نفسي - ذهني (صفة - adj.)","Stress has a major psychological impact.","للتوتر تأثير نفسي كبير."],
+  { id:"key_vocab", title:"الكلمات الرئيسية (Key Vocab)" },
+  { id:"important_vocab", title:"المفردات الهامة (Important Vocab)" }
+];
+
+/* صيغة الصف: [الكلمة، المعنى (النوع)، الجملة بالإنجليزية، الترجمة] */
+
+/* ---------- الوحدة الأولى ---------- */
+const U1 = [
+
+{ unit: 1, lesson: 1,
+  key: [
+["absolute word","كلمة قاطعة / لفظ مطلق (اسم - n.)","Always and never are examples of an absolute word.","«دائماً» و«أبداً» هما مثالان على الكلمة القاطعة."],
+["behavioral","سلوكي (صفة - adj.)","The psychologist studied behavioral patterns.","دَرَس عالم النفس الأنماط السلوكية."],
+["biased language","لغة متحيزة (اسم - n.)","Good journalism should avoid biased language.","يجب أن تتجنب الصحافة الجيدة اللغة المتحيزة."],
+["celebrity","شخصية مشهورة (اسم - n.)","The celebrity arrived at the event in a fancy car.","وصلت الشخصية المشهورة إلى الحدث في سيارة فارهة."],
+["compare","يقارن (فعل - v.)","It is easy to compare the two options.","من السهل مقارنة الخيارين."],
+["convincing","مقنع (صفة - adj.)","He gave a convincing argument for his plan.","قدم حجة مقنعة لخطته."],
+["dissatisfaction","عدم الرضا (اسم - n.)","She expressed her dissatisfaction with the service.","أعربت عن عدم رضاها عن الخدمة."],
+["evaluative","تقييمي (صفة - adj.)","The teacher provided evaluative feedback on the test.","قدم المعلم ملاحظات تقييمية على الاختبار."],
+["filtered","مفلتر (صفة - adj.)","Many social media photos are heavily filtered.","العديد من صور وسائل التواصل الاجتماعي مفلترة بشدة."],
+["gap","فجوة (اسم - n.)","We need to bridge the gap between theory and practice.","نحتاج إلى سد الفجوة بين النظرية والتطبيق."],
+["highlight-reel effect","تأثير اللقطات البارزة أو المثالية (اسم - n.)","Social media can create a false highlight-reel effect.","يمكن لوسائل التواصل الاجتماعي أن تخلق تأثير اللقطات البارزة الزائف."],
+["highlight","لقطة بارزة (اسم - n.)","Scoring the winning goal was the highlight of the match.","تسجيل هدف الفوز كان اللقطة البارزة في المباراة."],
+["acquaintance","معرفة (شخص معرفة عادية) (اسم - n.)","He is just an acquaintance, not a close friend.","إنه مجرد معرفة وليس صديقاً مقرباً."],
+["biased","متحيز / غير محايد (صفة - adj.)","The referee's decision seemed biased.","بدا قرار الحكم متحيزاً."],
+["bias","يتحيز / تحيز (فعل / اسم - v-n.)","Do not let personal feelings bias your judgment.","لا تدع المشاعر الشخصية تحيز حكمك."],
+["comparison","مقارنة (اسم - n.)","By comparison, the second method is much faster.","بالمقارنة، الطريقة الثانية أسرع بكثير."],
+["construct","يبني / ينشئ (فعل - v.)","Workers are trying to construct a new bridge.","يحاول العمال بناء جسر جديد."],
+["decade","عقد (10 سنوات) (اسم - n.)","Technology has changed dramatically over the past decade.","تغيرت التكنولوجيا بشكل جذري على مدار العقد الماضي."],
+["satisfy","يرضي (فعل - v.)","The delicious meal did not fully satisfy his hunger.","الوجبة الشهية لم ترضِ جوعه تماماً."],
+["fast-changing","سريع التغير (صفة - adj.)","We live in a fast-changing digital world.","نعيش في عالم رقمي سريع التغير."],
+["formation","تكوين (اسم - n.)","The formation of clouds signals upcoming rain.","تكوين السحب ينذر بقدوم المطر."],
+["hedging word","لفظ متحفظ / كلمة احترازية (اسم - n.)","Words like \"might\" or \"could\" act as a hedging word.","كلمات مثل «قد» أو «يمكن» تعمل كلفظ متحفظ."],
+["highlight","يبرز (فعل - v.)","The report highlights the importance of education.","يبرز التقرير أهمية التعليم."],
+["image-based","قائم على الصور (صفة - adj.)","Instagram is a heavily image-based platform.","إنستجرام منصة قائمة على الصور بشكل كبير."],
+["individual","فرد (اسم - n.)","Every individual has the right to express their opinion.","لكل فرد الحق في التعبير عن رأيه."],
+["influencer","مؤثر (اسم - n.)","The social media influencer shared a new video.","شارك المؤثر على وسائل التواصل الاجتماعي فيديو جديداً."]
+  ],
+  imp: [
+["instinctively","بالفطرة / تلقائياً (ظرف - adv.)","A mother acts instinctively to protect her child.","تتصرف الأم بالفطرة لحماية طفلها."],
+["imply","يلمح إلى (فعل - v.)","What do you mean by that remark? Does it imply something?","ماذا تقصد بهذه الملاحظة؟ هل تلمح إلى شيء ما؟"],
+["media literacy","الوعي الإعلامي (اسم - n.)","Media literacy helps students analyze news critically.","يساعد الوعي الإعلامي الطلاب على تحليل الأخبار بشكل نقدي."],
+["pressure","ضغط (اسم - n.)","Peer pressure can affect teenagers' choices.","ضغط الأقران يمكن أن يؤثر على خيارات المراهقين."],
+["publish","ينشر (فعل - v.)","The author decided to publish his new book.","قرر المؤلف نشر كتابه الجديد."],
+["rhetorical question","سؤال بلاغي (اسم - n.)","He asked a rhetorical question to make the audience think.","طرح سؤالاً بلاغياً ليدفع الجمهور للتفكير."],
+["self-esteem","تقدير الذات (اسم - n.)","Positive words build a child's self-esteem.","الكلمات الإيجابية تبني تقدير الذات لدى الطفل."],
+["sensitive","حساس (صفة - adj.)","Children have sensitive skin that needs care.","الأطفال لديهم بشرة حساسة تحتاج إلى عناية."],
+["social media platforms","منصات التواصل الاجتماعي (اسم - n.)","Teammates use social media platforms to chat.","يستخدم زملاء الفريق منصات التواصل الاجتماعي للدردشة."],
+["symptom","عرض (مرضي) (اسم - n.)","Fever is a common symptom of the flu.","الحمى عرض شائع للأنفلونزا."],
+["traditional media","إعلام تقليدي (اسم - n.)","Traditional media includes newspapers and television.","يتضمن الإعلام التقليدي الصحف والتلفزيون."],
+["toxic","سام (صفة - adj.)","We should stay away from toxic environments.","يجب أن نبتعد عن البيئات السامة."],
+["version","نسخة / إصدار (اسم - n.)","I downloaded the latest version of the app.","لقد قمت بتحميل أحدث نسخة من التطبيق."],
+["intensifier","أداة تقوية المعنى (اسم - n.)","\"Very\" is a common intensifier in English.","كلمة «Very» هي أداة تقوية معنى شائعة في الإنجليزية."],
+["mechanism","آلية (اسم - n.)","The body has a natural defense mechanism.","يمتلك الجسم آلية دفاع طبيعية."],
+["neutral language","لغة محايدة (اسم - n.)","Reports should be written in neutral language.","يجب أن تُكتب التقارير بلغة محايدة."],
+["psychological","نفسي (صفة - adj.)","Stress has a heavy psychological impact.","للتوتر تأثير نفسي ثقيل."],
+["reshape","يعيد تشكيل (فعل - v.)","Technology can reshape how we learn.","يمكن للتكنولوجيا أن تعيد تشكيل طريقة تعلمنا."],
+["selective","انتقائي (صفة - adj.)","You need to be selective when reading online news.","يجب أن تكون انتقائياً عند قراءة الأخبار عبر الإنترنت."],
+["self-image","الصورة الذاتية / نظرة الشخص لنفسه (اسم - n.)","Social media can negatively affect a teen's self-image.","يمكن لوسائل التواصل الاجتماعي أن تؤثر سلباً على الصورة الذاتية للمراهق."],
+["social","اجتماعي (صفة - adj.)","Humans are social creatures by nature.","البشر كائنات اجتماعية بطبيعتهم."],
+["statistic","إحصائية (اسم - n.)","The report showed an interesting statistic about education.","أظهر التقرير إحصائية ممتعة حول التعليم."],
+["teenager / adolescent","مراهق (اسم - n.)","Every teenager faces unique challenges during growth.","يواجه كل مراهق تحديات فريدة أثناء النمو."],
+["transform","يحول / يغير (فعل - v.)","Hard work can transform your life completely.","العمل الجاد يمكن أن يحول حياتك بالكامل."],
+["unrealistic","غير واقعي (صفة - adj.)","Setting unrealistic goals will only lead to frustration.","وضع أهداف غير واقعية سيؤدي فقط إلى الإحباط."],
+["viewer","مشاهد (اسم - n.)","The TV show attracted millions of viewers.","جذب برنامج التلفزيون ملايين المشاهدين."]
+  ]
+},
+
+{ unit: 1, lesson: 2,
+  key: [
+["measurable","قابل للقياس / ملموس (صفة - adj.)","We need to see measurable progress in your grades.","نحتاج أن نرى تقدماً قابلاً للقياس في درجاتك."],
+["nutritionist","أخصائي تغذية (اسم - n.)","The nutritionist advised him to eat more vegetables.","نصحه أخصائي التغذية بتناول المزيد من الخضروات."],
+["processed food","طعام مصنع (اسم - n.)","Processed food is usually high in sugar and salt.","الطعام المصنع يكون عادة غنياً بالسكر والملح."],
+["underestimated","لا يُقدر حق قدره / مُستهان به (صفة - adj.)","His hard work was underestimated by many.","عمله الجاد لم يُقدر حق قدره من قبل الكثيرين."],
+["mindfulness","اليقظة الذهنية (اسم - n.)","Mindfulness helps reduce stress and anxiety.","تساعد اليقظة الذهنية في تقليل التوتر والقلق."],
+["processed","مصنع (صفة - adj.)","Try to avoid processed snacks during study time.","حاول تجنب الوجبات الخفيفة المصنعة أوقات الدراسة."],
+["sedentary","خامل / قليل الحركة (صفة - adj.)","A sedentary lifestyle can lead to health problems.","نمط الحياة الخامل قد يؤدي إلى مشاكل صحية."],
+["well-being","العافية / الرفاهية (الجسدية والنفسية) (اسم - n.)","Good sleep is essential for your overall well-being.","النوم الجيد أمر أساسي لرفاهيتك العامة."]
+  ],
+  imp: [
+["absorb","يستوعب / يمتص (فعل - v.)","Sponges absorb water very quickly.","تمتص الإسفنجة الماء بسرعة كبيرة."],
+["anxiety","قلق (اسم - n.)","Deep breathing helps calm pre-exam anxiety.","التنفس العميق يساعد على تهدئة القلق الذي يسبق الامتحانات."],
+["boost","يعزز / يرفع (فعل - v.)","Healthy food and sleep boost your brain power.","الطعام الصحي والنوم يعززان قوة عقلك."],
+["caffeine","كافيين (اسم - n.)","Too much caffeine can disturb your sleep.","الكثير من الكافيين يمكن أن يزعج نومك."],
+["competitive","تنافسي (صفة - adj.)","We live in a highly competitive educational system.","نعيش في نظام تعليمي تنافسي للغاية."],
+["conscious","واعٍ / مدرك (صفة - adj.)","You must be conscious of your daily habits.","يجب أن تكون واعياً بعاداتك اليومية."],
+["consumption","استهلاك (اسم - n.)","Reduce your consumption of sugary drinks.","قلل استهلاكك للمشروبات السكرية."],
+["deliberate","متعمد / مقصود (صفة - adj.)","His success was the result of deliberate planning.","كان نجاحه نتيجة تخطيط متعمد."],
+["academic performance","الأداء الدراسي / الأكاديمي (اسم - n.)","Good nutrition improves academic performance.","التغذية الجيدة تحسن الأداء الدراسي."],
+["balanced diet","نظام غذائي متوازن (اسم - n.)","A balanced diet keeps you energized all day.","النظام الغذائي المتوازن يبقيك مفعماً بالنشاط طوال اليوم."],
+["brain development","نمو الدماغ (اسم - n.)","Proper sleep is vital for brain development.","النوم السليم أمر حيوي لنمو الدماغ."],
+["chemical","مادة كيميائية (اسم - n.)","The brain releases feel-good chemicals during exercise.","يطلق الدماغ مواد كيميائية باعثة على الشعور بالرضا أثناء التمارين."],
+["concentration","تركيز (اسم - n.)","Quiet environments improve study concentration.","البيئات الهادئة تحسن تركيز الدراسة."],
+["consume","يستهلك / يتناول (فعل - v.)","Students consume a lot of information daily.","يستهلك الطلاب الكثير من المعلومات يومياً."],
+["cope with","يتعامل مع / يتغلب على (فعل - v.)","Sports help teenagers cope with exam stress.","تساعد الرياضة المراهقين على التعامل مع توتر الامتحانات."],
+["depression","اكتئاب (اسم - n.)","Physical activity helps prevent feelings of depression.","النشاط البدني يساعد في الوقاية من مشاعر الاكتئاب."],
+["emotional control","التحكم في الانفعالات (اسم - n.)","Good emotional control helps you handle stressful situations.","التحكم الجيد في الانفعالات يساعدك على التعامل مع المواقف المجهدة."],
+["endorphins","الإندورفين (هرمونات السعادة) (اسم - n.)","Exercise releases endorphins that make you feel happy.","التمارين الرياضية تفرز الإندورفين الذي يجعلك تشعر بالسعادة."],
+["foundation","أساس / قاعدة (اسم - n.)","Hard work is the foundation of true success.","العمل الجاد هو أساس النجاح الحقيقي."],
+["hormone","هرمون (اسم - n.)","Insulin is an important hormone in the human body.","الإنسولين هرمون مهم في جسم الإنسان."],
+["emotional resilience","مرونة عاطفية (اسم - n.)","Emotional resilience helps you bounce back from failures.","المرونة العاطفية تساعدك على التعافي من الإخفاقات."],
+["fatigue","إرهاق / تعب شديد (اسم - n.)","Working long hours without rest leads to fatigue.","العمل لساعات طويلة دون راحة يؤدي إلى الإرهاق."],
+["healthy fat","دهن صحي (اسم - n.)","Avocados and nuts are great sources of healthy fat.","الأفوكادو والمكسرات مصادر رائعة للدهون الصحية."],
+["intake","ما يتناوله المرء من طعام وشراب / الكمية المتناولة (اسم - n.)","Reduce your sugar intake to stay healthy.","قلل من كمية السكر المتناولة لتبقى بصحة جيدة."],
+["junk food","طعام غير صحي (اسم - n.)","Avoid eating junk food if you want to stay fit.","تجنب تناول الطعام غير الصحي إذا كنت تريد الحفاظ على لياقتك."],
+["lean protein","بروتين قليل الدهون (اسم - n.)","Chicken breast is an excellent source of lean protein.","صدور الدجاج مصدر ممتاز للبروتين قليل الدهون."],
+["loneliness","الوحدة (اسم - n.)","Spending too much time alone can cause loneliness.","قضاء وقت طويل بمفردك قد يسبب الشعور بالوحدة."],
+["mental health","صحة نفسية (اسم - n.)","Taking care of your mental health is vital.","العناية بصحتك النفسية أمر حيوي."],
+["moderate","معتدل / متوسط (صفة - adj.)","Keep your physical exercise at a moderate level.","حافظ على تمارينك البدنية بمستوى معتدل."],
+["non-judgmental","غير حكمي (صفة - adj.)","A good friend should be a non-judgmental listener.","الصديق الجيد يجب أن يكون مستمعاً غير حكمي."],
+["physical activity","نشاط بدني (اسم - n.)","Daily physical activity boosts your energy.","النشاط البدني اليومي يعزز طاقتك."],
+["recovery","تعافٍ / استعادة العافية (اسم - n.)","Good sleep is essential for muscle recovery.","النوم الجيد ضروري لتعافي العضلات."],
+["reduction","انخفاض (اسم - n.)","We noticed a reduction in stress levels.","لاحظنا انخفاضاً في مستويات التوتر."],
+["screen-based","قائم على الشاشة (صفة - adj.)","Many modern jobs are screen-based.","العديد من الوظائف الحديثة قائمة على الشاشات."],
+["sleep routine","روتين نوم (اسم - n.)","A healthy sleep routine improves your memory.","روتين النوم الصحي يحسن ذاكرتك."],
+["survey","استطلاع / مسح (اسم - n.)","The school conducted a survey about student habits.","أجرت المدرسة استطلاعاً حول عادات الطلاب."],
+["largely","إلى حد كبير (ظرف - adv.)","Your success depends largely on your efforts.","نجاحك يعتمد إلى حد كبير على جهودك."],
+["lifestyle","نمط الحياة (اسم - n.)","A healthy lifestyle prevents many diseases.","نمط الحياة الصحي يقي من العديد من الأمراض."],
+["maintain","يحافظ على (فعل - v.)","It is important to maintain a balanced diet.","من المهم الحفاظ على نظام غذائي متوازن."],
+["meditation","تأمل (اسم - n.)","Daily meditation helps clear your mind.","التأمل اليومي يساعد في تصفية ذهنك."],
+["mood","المزاج (اسم - n.)","Good music can instantly change your mood.","الموسيقى الجيدة يمكنها تغيير مزاجك فوراً."],
+["perception","تصور / إدراك (اسم - n.)","Education changes our perception of the world.","التعليم يغير إدراكنا للعالم."],
+["quality","جودة / سمة / ميزة (اسم - n.)","Sleep quality affects your daily performance.","جودة النوم تؤثر على أدائك اليومي."],
+["reduce","يقلل (فعل - v.)","Relaxation techniques reduce anxiety.","تقنيات الاسترخاء تقلل القلق."],
+["release","يفرز / يطلق (فعل - v.)","The brain releases hormones when you are excited.","يفرز الدماغ هرمونات عندما تكون متحمساً."],
+["self-confidence","ثقة بالنفس (اسم - n.)","Success builds your self-confidence.","النجاح يبني ثقتك بنفسك."],
+["stress","توتر / ضغط نفسي (اسم - n.)","Too much stress is harmful to health.","الكثير من التوتر ضار بالصحة."],
+["target","هدف (اسم - n.)","Set a clear target and work hard to achieve it.","ضع هدفاً واضحاً واعمل بجد لتحقيقه."]
+  ]
+},
+
+{ unit: 1, lesson: 3,
+  key: [
+["agency","قدرة على الاختيار والتصرف (اسم - n.)","Every person should have the agency to make their own choices.","يجب أن تتمتع كل شخصية بالقدرة على الاختيار واتخاذ القرارات بنفسها."],
+["locus of control","موضع التحكم - مركز التحكم (اسم - n.)","An internal locus of control helps you take responsibility.","يساعدك مركز التحكم الداخلي على تحمل المسؤولية."],
+["resilience","مرونة - قدرة على التعافي (اسم - n.)","Building resilience helps students overcome tough exams.","بناء المرونة يساعد الطلاب على تخطي الامتحانات الصعبة."],
+["structural barrier","عائق بنيوي - حاجز هيكلي (اسم - n.)","We must work hard to remove any structural barrier to education.","يجب أن نعمل بجد لإزالة أي عائق بنيوي أمام التعليم."],
+["disempowering","مضعف للقدرة - مفقود للسيطرة (صفة - adj.)","Feeling helpless in class can be very disempowering.","الشعور بالعجز في الفصل يمكن أن يكون مضعفاً للقدرة بشدة."],
+["nudge","دفعة لطيفة - توجيه غير مباشر (اسم - n.)","A gentle nudge from a teacher can motivate you to study.","دفعة لطيفة من معلم يمكن أن تحفزك على الدراسة."],
+["self-efficacy","الكفاءة الذاتية (اسم - n.)","High self-efficacy boosts your confidence to succeed.","الكفاءة الذاتية العالية تعزز ثقتك في النجاح."]
+  ],
+  imp: [
+["abandon","يتخلى عن (فعل - v.)","Never abandon your dream of being the top of the republic.","لا تتخلى أبداً عن حلمك في أن تكون الأول على الجمهورية."],
+["adolescent","مراهق (اسم - n.)","An adolescent goes through many physical and mental changes.","يمر المراهق بالكثير من التغيرات الجسدية والنفسية."],
+["affordable","ميسور التكلفة / بسعر مناسب (صفة - adj.)","Students always look for affordable study materials.","يبحث الطلاب دائماً عن مواد دراسية بأسعار مناسبة."],
+["background","خلفية (اسم - n.)","Your cultural background shapes your worldview.","تشكل خلفيتك الثقافية نظرتك للعالم."],
+["brand","علامة تجارية (اسم - n.)","Some people prefer buying products from a famous brand.","يفضل بعض الناس شراء المنتجات من علامة تجارية مشهورة."],
+["capacity","قدرة - طاقة (اسم - n.)","The human brain has an amazing capacity to learn.","يمتلك الدماغ البشري قدرة مذهلة على التعلم."],
+["challenge","يتحدى - يعارض (فعل - v.)","Challenge yourself daily to improve your grades.","تحدى نفسك يومياً لتحسين درجاتك."],
+["confidence","ثقة (اسم - n.)","Solving hard math problems builds your confidence.","حل مسائل الرياضيات الصعبة يبني ثقتك بنفسك."],
+["demonstrate","يوضح (فعل - v.)","The experiment helps demonstrate the physical law.","تساعد التجربة في توضيح القانون الفيزيائي."],
+["accessible","متاح - سهل الوصول (صفة - adj.)","Educational platforms make learning accessible to everyone.","تجعل المنصات التعليمية التعلم متاحاً للجميع."],
+["advocate","مؤيد - داعم (اسم - n.)","He is a strong advocate for free education.","إنه مؤيد قوي للتعليم المجاني."],
+["attribute","ينسب (فعل - v.)","She likes to attribute her success to hard work.","تحب أن تنسب نجاحها إلى العمل الجاد."],
+["behavior","سلوك (اسم - n.)","Positive behavior leads to great achievements.","السلوك الإيجابي يؤدي إلى إنجازات عظيمة."],
+["campaign","حملة (اسم - n.)","The school launched a campaign to promote reading.","أطلقت المدرسة حملة لتشجيع القراءة."],
+["central","أساسي - محوري (صفة - adj.)","Physics plays a central role in the science track.","تلعب الفيزياء دوراً مركزياً في مسار العلوم."],
+["community","مجتمع محلي (اسم - n.)","We should actively support our local community.","يجب أن ندعم مجتمعنا المحلي بفعالية."],
+["context","سياق (اسم - n.)","Always read new words in context to understand them.","اقرأ دائماً الكلمات الجديدة في سياقها لفهمها."],
+["determine","يحدد (فعل - v.)","Your daily habits determine your future success.","عاداتك اليومية تحدد نجاحك المستقبلي."],
+["economic","اقتصادي (صفة - adj.)","The country is facing major economic challenges.","تواجه البلاد تحديات اقتصادية كبرى."],
+["external","خارجي (صفة - adj.)","We must consider both internal and external factors.","يجب أن نأخذ في الاعتبار العوامل الداخلية والخارجية."],
+["factor","عامل (اسم - n.)","Hard work is a key factor in achieving high grades.","العمل الجاد عامل رئيسي في تحقيق درجات عالية."],
+["freedom","حرية (اسم - n.)","Education gives individuals the freedom to choose their future.","التعليم يمنح الأفراد حرية اختيار مستقبلهم."],
+["healthy choice","اختيار صحي (اسم - n.)","Eating vegetables is always a healthy choice.","تناول الخضروات هو دائماً اختيار صحي."],
+["individual","فرد (اسم - n.)","Every single individual has a unique potential.","كل فرد لديه إمكانات فريدة."],
+["exert","يمارس - يفرض (فعل - v.)","Teachers exert a great effort to help students.","يبذل المعلمون جهداً كبيراً لمساعدة الطلاب."],
+["facility","مرفق - منشأة (اسم - n.)","The school has a wonderful sports facility.","تمتلك المدرسة مرفقاً رياضياً رائعاً."],
+["force","قوة (اسم - n.)","Gravity is a natural force that pulls objects down.","الجاذبية هي قوة طبيعية تسحب الأشياء إلى أسفل."],
+["genuine","حقيقي - صادق (صفة - adj.)","He showed genuine interest in learning physics.","لقد أظهر اهتماماً حقيقياً بتعلم الفيزياء."],
+["impressionable","سريع التأثر (صفة - adj.)","Young teenagers are often quite impressionable.","غالباً ما يكون المراهقون الصغار سريعي التأثر إلى حد ما."],
+["influence","يؤثر في (فعل - v.)","Good friends positively influence your study habits.","الأصدقاء الجيدون يؤثرون بشكل إيجابي على عادات دراستك."],
+["internal","داخلي (صفة - adj.)","An internal motivation is stronger than external rewards.","الدافع الداخلي أقوى من المكافآت الخارجية."],
+["journal","مجلة علمية (اسم - n.)","The research was published in a famous scientific journal.","نُشر البحث في مجلة علمية شهيرة."],
+["limited income","دخل محدود (اسم - n.)","Families with a limited income need affordable resources.","العائلات ذات الدخل المحدود تحتاج إلى مصادر ميسورة التكلفة."],
+["manage","يدير - يتحكم في (فعل - v.)","Learn how to manage your study time effectively.","تعلم كيف تدير وقت دراستك بفعالية."],
+["neighborhood","حي / منطقة سكنية (اسم - n.)","We live in a quiet and friendly neighborhood.","نعيش في حي هادئ وودود."],
+["outside force","قوة خارجية (اسم - n.)","Physics studies how an outside force affects movement.","تدرس الفيزياء كيف تؤثر القوة الخارجية على الحركة."],
+["peer pressure","ضغط الأقران (زملاء) (اسم - n.)","Teenagers should learn how to resist negative peer pressure.","يجب أن يتعلم المراهقون كيفية مقاومة ضغط الأقران السلبي."],
+["policy","سياسة - إجراء رسمي (اسم - n.)","The new educational policy focuses on deep understanding.","تركز السياسة التعليمية الجديدة على الفهم العميق."],
+["prioritize","يعطي الأولوية (فعل - v.)","You must prioritize your tasks to succeed.","يجب أن تعطي الأولوية لمهامك لكي تنجح."],
+["psychology","علم النفس (اسم - n.)","Psychology helps us understand human behavior.","يساعدنا علم النفس على فهم السلوك البشري."],
+["purpose","غرض - هدف (اسم - n.)","Find your true purpose and work towards it.","ابحث عن غرضك الحقيقي واعمل من أجله."],
+["restrict","يقيد (فعل - v.)","Do not let fear restrict your ambitions.","لا تدع الخوف يقيد طموحاتك."],
+["socioeconomic","اجتماعي اقتصادي (صفة - adj.)","The study examines socioeconomic factors in education.","تفحص الدراسة العوامل الاجتماعية والاقتصادية في التعليم."],
+["struggle","يكافح - يجد صعوبة (فعل - v.)","Never give up even if you struggle with some topics.","لا تستسلم أبداً حتى لو وجدت صعوبة في بعض الموضوعات."],
+["willpower","قوة إرادة (اسم - n.)","Strong willpower helps you study for long hours.","قوة الإرادة القوية تساعدك على الدراسة لساعات طويلة."],
+["introduce","يقدم - يدخل (فعل - v.)","The teacher will introduce a new physics lesson today.","سيقدم المعلم درس فيزياء جديداً اليوم."],
+["landmark study","دراسة بارزة (اسم - n.)","Scientists published a landmark study on the brain.","نشر العلماء دراسة بارزة حول الدماغ."],
+["maintain","يحافظ على (فعل - v.)","Maintain your focus to achieve the top rank.","حافظ على تركيزك لتحقيق المركز الأول."],
+["measure","مقياس - إجراء (اسم - n.)","Exams are a good measure of your academic progress.","الامتحانات مقياس جيد لتقدمك الأكاديمي."],
+["outcome","نتيجة (اسم - n.)","Hard work always leads to a positive outcome.","العمل الجاد يؤدي دائماً إلى نتيجة إيجابية."],
+["ownership","امتلاك - تحمل مسؤولية (اسم - n.)","Take full ownership of your learning journey.","تحمل المسؤولية الكاملة عن رحلة تعلمك."],
+["philosopher","فيلسوف (اسم - n.)","Ancient philosophers discussed the meaning of life.","ناقش الفلاسفة القدامى معنى الحياة."],
+["preference","تفضيل (اسم - n.)","Physics is my personal preference among sciences.","الفيزياء هي تفضيلي الشخصي بين العلوم."],
+["proponent","مؤيد (اسم - n.)","He is a strong proponent of online learning platforms.","إنه مؤيد قوي لمنصات التعلم عبر الإنترنت."],
+["public health","صحة عامة (اسم - n.)","Governments invest a lot in public health.","تستثمر الحكومات الكثير في الصحة العامة."],
+["responsibility","مسؤولية (اسم - n.)","Success is your own responsibility.","النجاح هو مسؤوليتك وحدك."],
+["restriction","قيد - تقييد (اسم - n.)","There is no restriction on continuous learning.","لا توجد قيود على التعلم المستمر."],
+["sociology","علم الاجتماع (اسم - n.)","Sociology studies human societies and relationships.","يدرس علم الاجتماع المجتمعات البشرية والعلاقات."],
+["target","يستهدف (فعل - v.)","Always target the highest goals in your life.","استهدف دائماً أعلى الأهداف في حياتك."]
+  ]
+},
+
+/* الدرس الرابع والخامس معاً (مرقّم 4 ويظهر باسم خاص في القائمة) */
+{ unit: 1, lesson: 4,
+  key: [
+["collectivist","جماعي - مؤمن بأهمية الجماعة (صفة - adj.)","A collectivist culture values group harmony over individual success.","الثقافة الجماعية تقدر انسجام المجموعة على النجاح الفردي."],
+["decisive","حاسم - مؤثر في النتيجة (صفة - adj.)","Hard work is a decisive factor in achieving your goals.","العمل الجاد عامل حاسم في تحقيق أهدافك."],
+["interact","يتفاعل (فعل - v.)","Students need to interact with each other in class.","يحتاج الطلاب إلى التفاعل مع بعضهم البعض في الفصل."],
+["rural","ريفي (صفة - adj.)","Life in rural areas is usually quiet and peaceful.","الحياة في المناطق الريفية عادة هادئة ومسالمة."],
+["urban","حضري - متعلق بالمدينة (صفة - adj.)","Urban life is fast-paced and full of activities.","الحياة الحضرية سريعة الوتيرة ومليئة بالأنشطة."],
+["counseling","الإرشاد النفسي (اسم - n.)","School counseling helps students deal with stress.","يساعد الإرشاد المدرسي الطلاب على التعامل مع التوتر."],
+["individualistic","فردي - يميل إلى الفردية (صفة - adj.)","Western societies tend to be more individualistic.","تميل المجتمعات الغربية إلى أن تكون أكثر فردية."],
+["rank","يرتب - يصنف (فعل - v.)","He aims to rank first in the republic exams.","يهدف لأن يكون الأول في امتحانات الجمهورية."],
+["targeted","موجه - مستهدف (صفة - adj.)","We need a targeted approach to solve this problem.","نحتاج إلى نهج مستهدف لحل هذه المشكلة."],
+["variable","متغير (اسم - n.)","Time is an important variable in any scientific experiment.","الوقت متغير مهم في أي تجربة علمية."]
+  ],
+  imp: [
+["academic","أكاديمي - دراسي (صفة - adj.)","Good study habits lead to high academic performance.","عادات الدراسة الجيدة تؤدي إلى أداء أكاديمي عالٍ."],
+["availability","توافر - إتاحة (اسم - n.)","The availability of online books makes learning easier.","توافر الكتب عبر الإنترنت يجعل التعلم أسهل."],
+["commonly","بصورة شائعة (ظرف - adv.)","This word is commonly used in daily English.","تُستخدم هذه الكلمة بصورة شائعة في اللغة الإنجليزية اليومية."],
+["control","يضبط - يتحكم في (فعل - v.)","You must control your time to achieve success.","يجب أن تتحكم في وقتك لتحقيق النجاح."],
+["adopt","يتبنى - يتأقلم / يتكيف (فعل - v.)","We should adopt new methods to improve our studying.","ينبغي أن نتبنى طرقاً جديدة لتحسين دراستنا."],
+["average","متوسط (اسم - n.)","His grades are well above the class average.","درجاته أعلى بكثير من متوسط الفصل."],
+["conclude","يستنتج - يخلص إلى (فعل - v.)","From the experiment, we can conclude that practice is key.","من التجربة، يمكننا أن نستنتج أن الممارسة هي المفتاح."],
+["cope with","يتعامل مع - يتكيف مع (فعل - v.)","Sports help students cope with exam pressure.","تساعد الرياضة الطلاب على التعامل مع ضغط الامتحانات."],
+["draw","يختار من - يستمد من (فعل - v.)","We can draw useful information from the study.","يمكننا استمداد معلومات مفيدة من الدراسة."],
+["gather","يجمع (فعل - v.)","Researchers gather data to analyze student habits.","يجمع الباحثون البيانات لتحليل عادات الطلاب."],
+["household","أسرة معيشية - منزل (اسم - n.)","Every household faces different economic challenges.","تواجه كل أسرة معيشية تحديات اقتصادية مختلفة."],
+["institution","مؤسسة (اسم - n.)","Schools are an essential educational institution.","المدارس مؤسسة تعليمية أساسية."],
+["examine","يفحص - يدرس (فعل - v.)","Scientists examine the results carefully.","يفحص العلماء النتائج بعناية."],
+["governorate","محافظة (اسم - n.)","Asyut is a prominent governorate in Egypt.","أسيوط محافظة بارزة في مصر."],
+["identify","يحدد - يتعرف على (فعل - v.)","Try to identify your weak points in studying.","حاول تحديد نقاط ضعفك في الدراسة."],
+["insufficient","غير كافٍ (صفة - adj.)","Insufficient sleep can harm your academic performance.","النوم غير الكافي يمكن أن يضر بأدائك الأكاديمي."],
+["manage","يدير - يتعامل مع (فعل - v.)","Learn to manage your daily tasks effectively.","تعلم كيفية إدارة مهامك اليومية بفعالية."],
+["nationwide","شامل أنحاء البلاد (صفة - adj.)","The ministry launched a nationwide educational study.","أطلقت الوزارة دراسة تعليمية شاملة لأنحاء البلاد."],
+["peer","قرين - شخص من الفئة نفسها (اسم - n.)","Compare your progress with your peers constructively.","قارن تقدمك مع أقرانك بشكل بناء."],
+["primary","رئيسي - أساسي (صفة - adj.)","Understanding concepts is your primary goal.","فهم المفاهيم هو هدفك الرئيسي."],
+["rely on","يعتمد على (فعل مركب - phr. v.)","Do not rely solely on memorization; understand the text.","لا تعتمد كلياً على الحفظ؛ افهم النص."],
+["respondent","مجيب - مستجيب للاستبيان (اسم - n.)","Every survey respondent gave useful feedback.","أعطى كل مجيب في الاستبيان تعليقات مفيدة."],
+["seek","يسعى إلى - يطلب (فعل - v.)","Always seek help when you face a difficult topic.","اسع دائماً للحصول على المساعدة عندما تواجه موضوعاً صعباً."],
+["universally","بصورة شاملة - لدى الجميع (ظرف - adv.)","Education is universally recognized as a human right.","يُعترف بالتعليم بصورة شاملة باعتباره حقاً من حقوق الإنسان."],
+["meaningfully","بصورة مؤثرة (ظرف - adv.)","Participate meaningfully in your class discussions.","شارك بصورة مؤثرة في مناقشات فصلك."],
+["participant","مشارك (اسم - n.)","Each study participant answered the questionnaire.","أجاب كل مشارك في الدراسة على الاستبيان."],
+["performance","أداء (اسم - n.)","Regular review improves your test performance.","المراجعة المنتظمة تحسن أداءك في الاختبارات."],
+["quality","جودة (اسم - n.)","Focus on the quality of your study hours, not just quantity.","ركز على جودة ساعات دراستك وليس الكمية فقط."],
+["report","يبلغ عن - يذكر (فعل - v.)","Researchers report a rise in online learning.","يبلغ الباحثون عن ارتفاع في التعلم عبر الإنترنت."],
+["sample","عينة (اسم - n.)","The scientist tested a random sample of students.","اختبر العالم عينة عشوائية من الطلاب."],
+["significant","ملحوظ - مهم (صفة - adj.)","There was a significant improvement in his grades.","كان هناك تحسن ملحوظ في درجاته."],
+["value","قيمة (اسم - n.)","Never underestimate the value of hard work.","لا تقلل أبداً من قيمة العمل الجاد."]
+  ]
+}
+];
+
+/* ---------- بناء الصفوف بالهيكل الجديد ---------- */
+let nextId = 1;
+const mk = (a, unit, lesson) => ({
+  id: nextId++,
+  word: a[0], translation: a[1],            // الهيكل الجديد
+  en: a[0], ar: a[1],                        // نفس القيم بأسماء الكود القديم (عشان ما يتكسرش)
+  en_sentence: a[2], ar_sentence: a[3],
+  unit, lesson
+});
+const fromU1 = k => U1.flatMap(l => l[k].map(a => mk(a, l.unit, l.lesson)));
+
+/* ---------- الوحدة الثانية ---------- */
+const U2 = [
+
+{ unit: 2, lesson: 1,
+  key: [
 ["addictive","مسبب للإدمان (صفة - adj.)","Some video games can be very addictive.","بعض ألعاب الفيديو يمكن أن تكون مسببة للإدمان للغاية."],
 ["boundary","حد / قاعدة (اسم - n.)","Parents need to set clear boundaries for children.","يحتاج الآباء وضع حدود واضحة للأطفال."],
 ["interfere","يتدخل / يعيق (فعل - v.)","Don't let distractions interfere with your study.","لا تدع المشتتات تعيق دراستك."],
@@ -515,29 +806,105 @@ const RAW = [
 ["anxiety","قلق (اسم - n.)","Exams often cause stress and anxiety.","غالباً ما تتسبب الامتحانات في التوتر والقلق."],
 ["fulfilling","مشبع / مرضٍ (صفة - adj.)","Teaching is a very fulfilling job.","التدريس وظيفة مرضية ومجزية للغاية."],
 ["mindful","واعٍ / منتبه (صفة - adj.)","Be mindful of your health and diet.","كن واعياً بصحتك ونظامك الغذائي."],
-["withdraw","ينسحب / يبتعد (فعل - v.)","He decided to withdraw from the competition.","قرر الانسحاب من المسابقة."],
-["achievement","إنجاز (اسم - n.)","Winning the award was a great achievement.","كان الفوز بالجائزة إنجازاً عظيماً."],
-["keep going","يستمر - يواصل (فعل مركب - phr. v.)","When things get hard, you must keep going.","عندما تصبح الأمور صعبة، يجب عليك الاستمرار."],
-["sense","شعور - إحساس (اسم - n.)","She felt a sense of relief after the exam.","شعرت بإحساس بالارتياح بعد الامتحان."],
-["shimmer","يلمع بخفوت (فعل/اسم - v-n.)","The stars began to shimmer in the night sky.","بدأت النجوم تلمع بخفوت في سماء الليل."],
-["struggle to keep up","يكافح لمجاراة الآخرين (تعبير - expr.)","He had to struggle to keep up with the fast class.","كان عليه أن يكافح لمجاراة الفصل السريع."],
-["insist","يصر (فعل - v.)","She insisted on paying for the coffee.","لقد أصرت على دفع ثمن القهوة."],
-["pedal stroke","ضغطة بدال (اسم - n.)","Each pedal stroke brought him closer to the finish line.","كل ضغطة بدال تقربه من خط النهاية."],
-["sense of achievement","شعور بالإنجاز (اسم - n.)","Finishing the project gave me a real sense of achievement.","منحني إنهاء المشروع شعوراً حقيقياً بالإنجاز."],
-["struggle","يكافح - يناضل (فعل - v.)","Students sometimes struggle with difficult subjects.","يكافح الطلاب أحياناً مع المواد الصعبة."],
-["wear on","يمضي ببطء (فعل مركب - phr. v.)","As the long day wore on, he became very tired.","مع مضي اليوم الطويل ببطء، أصبح متعباً للغاية."]
-]},
-{ id:"important_vocab", title:"المفردات الهامة (Important Vocab)", w:[
+["withdraw","ينسحب / يبتعد (فعل - v.)","He decided to withdraw from the competition.","قرر الانسحاب من المسابقة."]
+  ],
+  imp: [
+["acknowledge","يدرك / يقرّ (فعل - v.)","She refused to acknowledge her mistake.","رفضت أن تقر بخطئها."],
+["average","متوسط (اسم - n.)","His grades are above the class average.","درجاته أعلى من متوسط الفصل."],
+["concerned","قلق / مهتم (صفة - adj.)","We are all concerned about his health.","نحن جميعا قلقون بشأن صحته."],
+["creative hobby","هواية إبداعية (اسم - n.)","Painting is a wonderful creative hobby.","الرسم هواية إبداعية رائعة."],
+["depression","اكتئاب (اسم - n.)","Loneliness can sometimes lead to depression.","الوحدة يمكن أن تؤدي أحياناً إلى الاكتئاب."],
+["entirely","تماماً / كلياً (ظرف - adv.)","I agree with you entirely.","أتفق معك تماماً."],
+["gain","يكتسب / يحصل على (فعل - v.)","Reading helps you gain new knowledge.","تساعدك القراءة على اكتساب معرفة جديدة."],
+["hand-eye coordination","التآزر البصري الحركي (اسم - n.)","Video games can improve hand-eye coordination.","يمكن لألعاب الفيديو تحسين التآزر البصري الحركي."],
+["appearance","مظهر (اسم - n.)","First impressions depend heavily on appearance.","الانطباعات الأولى تعتمد بشدة على المظهر."],
+["concentration","تركيز (اسم - n.)","Studying in a quiet room improves concentration.","الدراسة في غرفة هادئة تحسن التركيز."],
+["constant","مستمر (صفة - adj.)","Success requires constant effort.","النجاح يتطلب جهداً مستمراً."],
+["debate","جدال / نقاش / مناظرة (اسم - n.)","The class had an interesting debate about technology.","أجرى الفصل مناقشة ممتعة حول التكنولوجيا."],
+["effect","تأثير / أثر (اسم - n.)","Exercise has a positive effect on the body.","للتمارين الرياضية تأثير إيجابي على الجسم."],
+["essential","أساسي / ضروري (صفة - adj.)","Water is essential for all living creatures.","الماء ضروري لجميع المخلوقات الحية."],
+["gaming disorder","اضطراب إدمان الألعاب الإلكترونية (اسم - n.)","Excessive play can lead to a gaming disorder.","اللعب المفرط قد يؤدي إلى اضطراب إدمان الألعاب."],
+["harmful","ضار (صفة - adj.)","Smoking is extremely harmful to health.","التدخين ضار للغاية بالصحة."],
+["mental health","صحة نفسية (اسم - n.)","Mental health is just as important as physical health.","الصحة النفسية لا تقل أهمية عن الصحة البدنية."],
+["national study","دراسة وطنية (اسم - n.)","The government conducted a national study on education.","أجرت الحكومة دراسة وطنية حول التعليم."],
+["platform","منصة (اسم - n.)","Online learning platforms are very helpful for students.","منصات التعلم عبر الإنترنت مفيدة جداً للطلاب."],
+["real-world relationship","علاقة واقعية (اسم - n.)","It is important to build strong real-world relationships.","من المهم بناء علاقات واقعية قوية."],
+["report","يذكر - يبلغ - تقرير (اسم / فعل - v-n.)","The journalist wrote a detailed report about the event.","كتب الصحفي تقريراً مفصلاً عن الحدث."],
+["researcher","باحث (اسم - n.)","The researcher published a new scientific paper.","نشر الباحث بحثاً علمياً جديداً."],
+["screen time","وقت استخدام الشاشات (اسم - n.)","Parents should monitor their children's screen time.","يجب على الآباء مراقبة وقت استخدام أطفالهم للشاشات."],
+["self-esteem","تقدير الذات - الاعتداد بالنفس (اسم - n.)","Success helps build a student's self-esteem.","النجاح يساعد في بناء تقدير الذات لدى الطالب."],
+["sleep quality","جودة النوم (اسم - n.)","Good sleep quality is essential for brain function.","جودة النوم الجيدة ضرورية لوظائف الدماغ."],
+["spark","يثير - يطلق شرارة (فعل / اسم - v-n.)","The interesting lecture sparked a long debate.","أثارت المحاضرة الممتعة نقاشاً طويلاً."],
+["mood","مزاج (اسم - n.)","Listening to music can instantly improve your mood.","الاستماع إلى الموسيقى يمكن أن يحسن مزاجك فوراً."],
+["overestimate","يبالغ في تقدير (فعل - v.)","Never overestimate your opponent's weakness.","لا تبالغ أبداً في تقدير ضعف خصمك."],
+["problem-solving skill","مهارة حل المشكلات (اسم - n.)","Engineering teaches you strong problem-solving skills.","تعليم الهندسة يمنحك مهارات قوية في حل المشكلات."],
+["regarding","بخصوص / بشأن (حرف جر - prep.)","I have a question regarding the homework.","لدي سؤال بخصوص الواجب المدرسي."],
+["research report","تقرير بحثي (اسم - n.)","She submitted her research report on time.","لقد قدمت تقريرها البحثي في الوقت المحدد."],
+["restore","يستعيد (فعل - v.)","Sleeping well helps restore your energy.","النوم الجيد يساعد في استعادة طاقتك."],
+["screen-saturated","مشبع بالشاشات - تسيطر عليه الشاشات (صفة - adj.)","We live in a screen-saturated modern world.","نحن نعيش في عالم حديث تسيطر عليه الشاشات."],
+["self-image","الصورة الذاتية (اسم - n.)","Positive feedback improves a child's self-image.","التعليقات الإيجابية تحسن الصورة الذاتية للطفل."],
+["socializing","تواصل / مخالطة اجتماعية (اسم - n.)","Face-to-face socializing is important for mental health.","التواصل الاجتماعي وجهاً لوجه مهم للصحة النفسية."],
+["worth","قيمة (اسم - n.)","Never doubt your own worth and abilities.","لا تشك أبداً في قيمتك وقدراتك الذاتية."]
+  ]
+},
+
+{ unit: 2, lesson: 2,
+  key: [
+["arena","مجال - ساحة (اسم - n.)","The stadium serves as an arena for local sports.","يُعد الملعب بمثابة ساحة للرياضات المحلية."],
+["cognitive","معرفي - ذهني (صفة - adj.)","Puzzles help improve cognitive abilities.","تساعد الألغاز في تحسين القدرات المعرفية."],
+["flexibility","مرونة (اسم - n.)","Stretching exercises increase body flexibility.","تزيد تمارين الإطالة من مرونة الجسم."],
+["authentic","حقيقي - أصيل (صفة - adj.)","We tasted authentic Egyptian food.","لقد تذوقنا طعاماً مصرياً أصيلاً."],
+["engagement","اندماج - مشاركة (اسم - n.)","Class engagement makes learning more fun.","يجعل الاندماج في الفصل الدراسي التعلم أكثر متعة."],
+["rehearsal","بروفة - تدريب قبل العرض (اسم - n.)","The actors are at the final rehearsal.","الممثلون في البروفة الأخيرة."]
+  ],
+  imp: [
+["absorb","يستوعب / يمتص (فعل - v.)","Sponges absorb water quickly.","تمتص الإسفنجة الماء بسرعة."],
+["absorption","استيعاب / انخراط - الامتصاص (اسم - n.)","The absorption of nutrients is vital for health.","امتصاص العناصر الغذائية أمر حيوي للصحة."],
+["additional","إضافي (صفة - adj.)","I have some additional questions.","لدي بعض الأسئلة الإضافية."],
+["arabesque design","تصميم زخرفي عربي (اسم - n.)","The palace walls feature an arabesque design.","تتميز جدران القصر بتصميم زخرفي عربي."],
+["brain region","منطقة في الدماغ (اسم - n.)","Scientists mapped a new brain region.","رسم العلماء خريطة لمنطقة جديدة في الدماغ."],
+["calligraphy","خط عربي (اسم - n.)","Arabic calligraphy is a wonderful art form.","الخط العربي شكل فني رائع."],
+["collaboration","تعاون (اسم - n.)","Great projects need strong collaboration.","المشاريع العظيمة تحتاج إلى تعاون قوي."],
+["condition","حالة / ظرف (اسم - n.)","The car is in good condition.","السيارة في حالة جيدة."],
+["connect","يربط (فعل - v.)","This bridge connects the two cities.","يربط هذا الجسر بين المدينتين."],
+["consistently","بصورة منتظمة / بشكل ثابت (ظرف - adv.)","He works out consistently every day.","يتمرن بانتظام كل يوم."],
+["contemporary","معاصر (صفة - adj.)","She loves contemporary art exhibitions.","إنها تحب معارض الفن المعاصر."],
+["cortisol","كورتيزول - هرمون التوتر (اسم - n.)","High stress increases cortisol levels.","التوتر الشديد يرفع مستويات الكورتيزول."],
+["creative","إبداعي - مبدع (صفة - adj.)","He came up with a creative solution.","لقد توصل إلى حل إبداعي."],
+["cultural","ثقافي (صفة - adj.)","Egypt has a rich cultural heritage.","تمتلك مصر تراثاً ثقافياً غنياً."],
+["decade","عقد - عشر سنوات (اسم - n.)","A decade has passed since we met.","لقد مرت عشر سنوات منذ أن التقينا."],
+["drama production","إنتاج مسرحي (اسم - n.)","The school presented a wonderful drama production.","قدمت المدرسة إنتاجاً مسرحياً رائعاً."],
+["embrace","يتقبل - يحتضن (فعل - v.)","We should embrace new technologies.","يجب أن نتقبل التقنيات الحديثة."],
+["employer","صاحب عمل (اسم - n.)","The employer offered him a new job.","عرض عليه صاحب العمل وظيفة جديدة."],
+["entertainment","ترفيه - تسلية (اسم - n.)","Reading is a great source of entertainment.","القراءة مصدر عظيم للترفيه."],
+["evidence","دليل (اسم - n.)","The police found strong evidence.","عثرت الشرطة على دليل قوي."],
+["exploration","استكشاف (اسم - n.)","Space exploration fascinates scientists.","استكشاف الفضاء يثير اهتمام العلماء."],
+["failure","فشل (اسم - n.)","Failure is the first step to success.","الفشل هو الخطوة الأولى نحو النجاح."],
+["heritage","تراث (اسم - n.)","We are proud of our ancient heritage.","نحن فخورون بتراثنا العريق."],
+["impact","تأثير - أثر (اسم - n.)","Technology has a huge impact on our lives.","للتكنولوجيا تأثير هائل على حياتنا."]
+  ]
+},
+
+{ unit: 2, lesson: 3,
+  key: [
+["access","إمكانية الوصول والاستفادة (اسم - n.)","Students have free access to the library.","لدى الطلاب إمكانية الوصول المجاني إلى المكتبة."],
+["enjoyment","استمتاع (اسم - n.)","Reading brings me a lot of enjoyment.","القراءة تجلب لي الكثير من الاستمتاع."],
+["life skill","مهارة حياتية (اسم - n.)","Communication is an essential life skill.","التواصل مهارة حياتية أساسية."],
+["competitive","تنافسي (صفة - adj.)","The job market is very competitive today.","سوق العمل تنافسي للغاية اليوم."],
+["inactive","غير نشيط - خامل - كسول (صفة - adj.)","An inactive lifestyle can lead to health problems.","أسلوب الحياة غير النشيط يمكن أن يؤدي إلى مشاكل صحية."],
+["psychological","نفسي - ذهني (صفة - adj.)","Stress has a major psychological impact.","للتوتر تأثير نفسي كبير."]
+  ],
+  imp: [
 ["academic","دراسي (صفة - adj.)","He achieved great academic success.","لقد حقق نجاحاً دراسياً كبيراً."],
 ["adulthood","سن الرشد (اسم - n.)","Responsibilities increase when you reach adulthood.","تزداد المسؤوليات عندما تبلغ سن الرشد."],
 ["belonging","الشعور بالانتماء (اسم - n.)","Clubs give students a strong sense of belonging.","تمنح الأندية الطلاب شعوراً قوياً بالانتماء."],
 ["cardiovascular","متعلق بالقلب والأوعية الدموية (صفة - adj.)","Running is great for cardiovascular health.","الجري رائع لصحة القلب والأوعية الدموية."],
 ["competitiveness","التنافسية (اسم - n.)","Competitiveness helps athletes improve their skills.","تساعد التنافسية الرياضيين على تحسين مهاراتهم."],
-["conduct","يجري - ينفذ (فعل - v.)","Scientists conduct experiments in the lab.","يجري العلماء تجارب في المعمل."],
+["conduct","يجري - ينفذ - يتصرف (فعل - v.)","Scientists conduct experiments in the lab.","يجري العلماء تجارب في المعمل."],
 ["coordination","تناسق - تنسيق (اسم - n.)","Dancing requires good body coordination.","يتطلب الرقص تناسقاً جيداً للجسم."],
-["disengage","ينسحب (فعل - v.)","He decided to disengage from the argument.","قرر الانسحاب من النقاش."],
+["disengage","ينسحب - يتوقف عن المشاركة (فعل - v.)","He decided to disengage from the argument.","قرر الانسحاب من النقاش."],
 ["emotional regulation","تنظيم الانفعال (اسم - n.)","Emotional regulation is important for mental health.","تنظيم الانفعال مهم للصحة النفسية."],
-["expand","يوسع - يتمدد (فعل - v.)","Metal tends to expand when heated.","تميل المعادن للتمدد عندما تسخن."],
+["expand","يوسع - يتسع - يتمدد (فعل - v.)","Metal tends to expand when heated.","تميل المعادن للتمدد عندما تسخن."],
 ["failure","فشل (اسم - n.)","Never let failure stop you from trying.","لا تدع الفشل يمنعك أبداً من المحاولة."],
 ["academic pressure","ضغط أكاديمي (اسم - n.)","Many students suffer from academic pressure.","يعاني العديد من الطلاب من الضغط الأكاديمي."],
 ["belong","ينتمي (فعل - v.)","These books belong to the school library.","تنتمي هذه الكتب لمكتبة المدرسة."],
@@ -576,54 +943,36 @@ const RAW = [
 ["resource","مورد (اسم - n.)","Water is our most precious resource.","الماء هو أثمن مواردنا."],
 ["social","اجتماعي (صفة - adj.)","Humans are social creatures.","البشر كائنات اجتماعية."],
 ["target","هدف (اسم - n.)","Our main target is to win the match.","هدفنا الأساسي هو الفوز بالمباراة."],
-["transfer","ينتقل / ينقل (فعل - v.)","He decided to transfer to another school.","قرر الانتقال إلى مدرسة أخرى."],
-["acknowledge","يدرك / يقرّ (فعل - v.)","She refused to acknowledge her mistake.","رفضت أن تقر بخطئها."],
-["average","متوسط (اسم - n.)","His grades are above the class average.","درجاته أعلى من متوسط الفصل."],
-["concerned","قلق / مهتم (صفة - adj.)","We are all concerned about his health.","نحن جميعا قلقون بشأن صحته."],
-["creative hobby","هواية إبداعية (اسم - n.)","Painting is a wonderful creative hobby.","الرسم هواية إبداعية رائعة."],
-["depression","اكتئاب (اسم - n.)","Loneliness can sometimes lead to depression.","الوحدة يمكن أن تؤدي أحياناً إلى الاكتئاب."],
-["entirely","تماماً / كلياً (ظرف - adv.)","I agree with you entirely.","أتفق معك تماماً."],
-["gain","يكتسب / يحصل على (فعل - v.)","Reading helps you gain new knowledge.","تساعدك القراءة على اكتساب معرفة جديدة."],
-["hand-eye coordination","التآزر البصري الحركي (اسم - n.)","Video games can improve hand-eye coordination.","يمكن لألعاب الفيديو تحسين التآزر البصري الحركي."],
-["appearance","مظهر (اسم - n.)","First impressions depend heavily on appearance.","الانطباعات الأولى تعتمد بشدة على المظهر."],
-["concentration","تركيز (اسم - n.)","Studying in a quiet room improves concentration.","الدراسة في غرفة هادئة تحسن التركيز."],
-["constant","مستمر (صفة - adj.)","Success requires constant effort.","النجاح يتطلب جهداً مستمراً."],
-["debate","جدال / مناظرة (اسم - n.)","The class had an interesting debate about technology.","أجرى الفصل مناقشة ممتعة حول التكنولوجيا."],
-["effect","تأثير / أثر (اسم - n.)","Exercise has a positive effect on the body.","للتمارين الرياضية تأثير إيجابي على الجسم."],
-["essential","أساسي / ضروري (صفة - adj.)","Water is essential for all living creatures.","الماء ضروري لجميع المخلوقات الحية."],
-["gaming disorder","اضطراب إدمان الألعاب (اسم - n.)","Excessive play can lead to a gaming disorder.","اللعب المفرط قد يؤدي إلى اضطراب إدمان الألعاب."],
-["harmful","ضار (صفة - adj.)","Smoking is extremely harmful to health.","التدخين ضار للغاية بالصحة."],
-["mental health","صحة نفسية (اسم - n.)","Mental health is just as important as physical health.","الصحة النفسية لا تقل أهمية عن الصحة البدنية."],
-["national study","دراسة وطنية (اسم - n.)","The government conducted a national study on education.","أجرت الحكومة دراسة وطنية حول التعليم."],
-["platform","منصة (اسم - n.)","Online learning platforms are very helpful for students.","منصات التعلم عبر الإنترنت مفيدة جداً للطلاب."],
-["real-world relationship","علاقة واقعية (اسم - n.)","It is important to build strong real-world relationships.","من المهم بناء علاقات واقعية قوية."],
-["report","تقرير / يذكر (اسم/فعل - v-n.)","The journalist wrote a detailed report about the event.","كتب الصحفي تقريراً مفصلاً عن الحدث."],
-["researcher","باحث (اسم - n.)","The researcher published a new scientific paper.","نشر الباحث بحثاً علمياً جديداً."],
-["screen time","وقت استخدام الشاشات (اسم - n.)","Parents should monitor their children's screen time.","يجب على الآباء مراقبة وقت استخدام أطفالهم للشاشات."],
-["self-esteem","تقدير الذات (اسم - n.)","Success helps build a student's self-esteem.","النجاح يساعد في بناء تقدير الذات لدى الطالب."],
-["sleep quality","جودة النوم (اسم - n.)","Good sleep quality is essential for brain function.","جودة النوم الجيدة ضرورية لوظائف الدماغ."],
-["spark","يثير / يطلق شرارة (فعل/اسم - v-n.)","The interesting lecture sparked a long debate.","أثارت المحاضرة الممتعة نقاشاً طويلاً."],
-["mood","مزاج (اسم - n.)","Listening to music can instantly improve your mood.","الاستماع إلى الموسيقى يمكن أن يحسن مزاجك فوراً."],
-["overestimate","يبالغ في تقدير (فعل - v.)","Never overestimate your opponent's weakness.","لا تبالغ أبداً في تقدير ضعف خصمك."],
-["problem-solving skill","مهارة حل المشكلات (اسم - n.)","Engineering teaches you strong problem-solving skills.","تعليم الهندسة يمنحك مهارات قوية في حل المشكلات."],
-["regarding","بخصوص / بشأن (حرف جر - prep.)","I have a question regarding the homework.","لدي سؤال بخصوص الواجب المدرسي."],
-["research report","تقرير بحثي (اسم - n.)","She submitted her research report on time.","لقد قدمت تقريرها البحثي في الوقت المحدد."],
-["restore","يستعيد (فعل - v.)","Sleeping well helps restore your energy.","النوم الجيد يساعد في استعادة طاقتك."],
-["screen-saturated","تسيطر عليه الشاشات (صفة - adj.)","We live in a screen-saturated modern world.","نحن نعيش في عالم حديث تسيطر عليه الشاشات."],
-["self-image","الصورة الذاتية (اسم - n.)","Positive feedback improves a child's self-image.","التعليقات الإيجابية تحسن الصورة الذاتية للطفل."],
-["socializing","تواصل / مخالطة اجتماعية (اسم - n.)","Face-to-face socializing is important for mental health.","التواصل الاجتماعي وجهاً لوجه مهم للصحة النفسية."],
-["worth","قيمة (اسم - n.)","Never doubt your own worth and abilities.","لا تشك أبداً في قيمتك وقدراتك الذاتية."],
-["ache","يؤلم - ألم (فعل/اسم - v-n.)","My legs began to ache after the long run.","بدأت ساقاي تؤلماني بعد الجري الطويل."],
+["transfer","ينتقل / ينقل (فعل - v.)","He decided to transfer to another school.","قرر الانتقال إلى مدرسة أخرى."]
+  ]
+},
+
+/* الدرس الرابع والخامس معاً (مرقّم 4) */
+{ unit: 2, lesson: 4,
+  key: [
+["achievement","إنجاز (اسم - n.)","Winning the award was a great achievement.","كان الفوز بالجائزة إنجازاً عظيماً."],
+["keep going","يستمر - يواصل (فعل مركب - phr. v.)","When things get hard, you must keep going.","عندما تصبح الأمور صعبة، يجب عليك الاستمرار."],
+["sense","شعور - إحساس (اسم - n.)","She felt a sense of relief after the exam.","شعرت بإحساس بالارتياح بعد الامتحان."],
+["shimmer","يلمع بخفوت - بريق خافت (فعل / اسم - v-n.)","The stars began to shimmer in the night sky.","بدأت النجوم تلمع بخفوت في سماء الليل."],
+["struggle to keep up","يكافح لمجاراة الآخرين (تعبير - expr.)","He had to struggle to keep up with the fast class.","كان عليه أن يكافح لمجاراة الفصل السريع."],
+["insist","يصر (فعل - v.)","She insisted on paying for the coffee.","لقد أصرت على دفع ثمن القهوة."],
+["pedal stroke","ضغطة بدال (اسم - n.)","Each pedal stroke brought him closer to the finish line.","كل ضغطة بدال تقربه من خط النهاية."],
+["sense of achievement","شعور بالإنجاز (اسم - n.)","Finishing the project gave me a real sense of achievement.","منحني إنهاء المشروع شعوراً حقيقياً بالإنجاز."],
+["struggle","يكافح - يناضل (فعل - v.)","Students sometimes struggle with difficult subjects.","يكافح الطلاب أحياناً مع المواد الصعبة."],
+["wear on","يمضي ببطء (فعل مركب - phr. v.)","As the long day wore on, he became very tired.","مع مضي اليوم الطويل ببطء، أصبح متعباً للغاية."]
+  ],
+  imp: [
+["ache","يؤلم - ألم (فعل / اسم - v-n.)","My legs began to ache after the long run.","بدأت ساقاي تؤلماني بعد الجري الطويل."],
 ["afterwards","بعد ذلك (ظرف - adv.)","We had dinner and went for a walk afterwards.","تناولنا العشاء وذهبنا في نزهة بعد ذلك."],
 ["breathing","التنفس (اسم - n.)","Deep breathing helps you relax.","التنفس العميق يساعدك على الاسترخاء."],
 ["comfort","راحة (اسم - n.)","She likes the comfort of her own home.","إنها تحب راحة منزلها الخاص."],
 ["considerably","بدرجة كبيرة (ظرف - adv.)","His English improved considerably this year.","تحسنت لغته الإنجليزية بدرجة كبيرة هذا العام."],
 ["curtain","ستارة (اسم - n.)","Open the curtain to let the sunlight in.","افتح الستارة لتسمح لضوء الشمس بالدخول."],
-["defeat","هزيمة - يهزم (اسم/فعل - n-v.)","They accepted the defeat and promised to improve.","لقد تقبلوا الهزيمة ووعدوا بالتحسن."],
-["direct","مباشر - يوجه (صفة/فعل - adj-v.)","He gave me direct instructions for the task.","أعطاني تعليمات مباشرة للمهمة."],
+["defeat","هزيمة - يهزم (اسم / فعل - n-v.)","They accepted the defeat and promised to improve.","لقد تقبلوا الهزيمة ووعدوا بالتحسن."],
+["direct","مباشر - يوجه / يرشد (صفة / فعل - adj-v.)","He gave me direct instructions for the task.","أعطاني تعليمات مباشرة للمهمة."],
 ["effort","جهد (اسم - n.)","Passing the exam requires a lot of effort.","اجتياز الامتحان يتطلب جهداً كبيراً."],
-["experience","تجربة - يجرب (اسم/فعل - n-v.)","Travelling gives you a wonderful life experience.","السفر يمنحك تجربة حياة رائعة."],
-["admit","يعترف بـ (فعل - v.)","He had to admit that he made a mistake.","كان عليه أن يعترف بأنه ارتكب خطأ."],
+["experience","تجربة - يجرب / يعايش (اسم / فعل - n-v.)","Travelling gives you a wonderful life experience.","السفر يمنحك تجربة حياة رائعة."],
+["admit","يعترف بـ - يقِرّ (فعل - v.)","He had to admit that he made a mistake.","كان عليه أن يعترف بأنه ارتكب خطأ."],
 ["bank","ضفة / جانب (اسم - n.)","They sat on the grassy river bank.","جلسوا على ضفة النهر العشبية."],
 ["capable","قادر (صفة - adj.)","She is a very capable student.","إنها طالبة قادرة جداً (كفؤة)."],
 ["complaint","شكوى (اسم - n.)","The manager listened to the customer's complaint.","استمع المدير إلى شكوى العميل."],
@@ -634,6 +983,7 @@ const RAW = [
 ["exhausted","منهك (صفة - adj.)","She was exhausted after studying all night.","كانت منهكة بعد الدراسة طوال الليل."],
 ["focus","تركيز (اسم - n.)","Keep your focus on your main goal.","حافظ على تركيزك على هدفك الأساسي."],
 ["fulfilled","راض وسعيد (صفة - adj.)","He felt fulfilled after helping others.","شعَر بالرضا والسعادة بعد مساعدة الآخرين."],
+["genuinely","بصدق (ظرف - adv.)","She was genuinely happy for her friend's success.","كانت سعيدة بصدق لنجاح صديقتها."],
 ["gentle","لطيف (صفة - adj.)","The teacher gave the student a gentle reminder.","أعطى المعلم الطالب تذكرة لطيفة."],
 ["immediate","فوري - مباشر (صفة - adj.)","The medicine provided immediate relief.","قدم الدواء راحة فورية."],
 ["leisure","وقت فراغ - ترفيه (اسم - n.)","Reading is my favorite leisure activity.","القراءة هي نشاطي الترفيهي المفضل."],
@@ -658,24 +1008,30 @@ const RAW = [
 ["stressor","عامل ضغط (اسم - n.)","Exams are a major stressor for students.","الامتحانات تعد عامل ضغط رئيسي للطلاب."],
 ["unexpected","غير متوقع (صفة - adj.)","The news came as an unexpected surprise.","جاءت الأخبار بمثابة مفاجأة غير متوقعة."],
 ["view","منظر / منظور (اسم - n.)","The hotel room had a wonderful sea view.","كانت غرفة الفندق تتمتع بمنظر بحري رائع."]
-]}
+  ]
+}
 ];
 
-const DATA = { sections: RAW.map(s => ({
-  id: s.id, title_ar: s.title,
-  words: s.w.map(a => ({ en:a[0], ar:a[1], en_sentence:a[2], ar_sentence:a[3] }))
-}))};
+/* ---------- بناء DATA بالهيكل الجديد (الوحدة 1 + الوحدة 2) ---------- */
+const fromU2 = k => U2.flatMap(l => l[k].map(a => mk(a, l.unit, l.lesson)));
+
+const DATA = { sections: [
+  { id: RAW[0].id, title_ar: RAW[0].title,
+    words: [...fromU1('key'), ...fromU2('key')] },
+  { id: RAW[1].id, title_ar: RAW[1].title,
+    words: [...fromU1('imp'), ...fromU2('imp')] }
+]};
 
 /* ---------- Helpers ---------- */
 const $  = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];} return a; }
-function sample(arr,n,exclude){ return shuffle(arr.filter(x=>x!==exclude)).slice(0,n); }
 function normAr(s){ return s.toLowerCase().replace(/[\u064B-\u065F\u0670]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه'); }
 function wordsFor(id){
   const secs = id==='all' ? DATA.sections : DATA.sections.filter(x=>x.id===id);
-  return secs.flatMap(s => s.words.map(w => ({...w, sec:s.title_ar})));
+  return secs.flatMap(s => s.words.map(w => ({...w, sec:s.title_ar})))
+    .filter(w => (fUnit==='all' || w.unit===+fUnit) && (fLesson==='all' || w.lesson===+fLesson));
 }
 function filtered(){
   const all = wordsFor(curSec);
@@ -734,15 +1090,34 @@ function say(text, btn) {
     window.speechSynthesis.speak(u);
   }
 }
-/* ---------- State ---------- */
-let curSec = 'all', query = '', view = 'cards';
 
-function renderFilters(){
-  const allCount = DATA.sections.reduce((n,s)=>n+s.words.length,0);
-  const fs = [{id:'all',label:'الكل',c:allCount}, ...DATA.sections.map(s=>({id:s.id,label:s.title_ar,c:s.words.length}))];
-  $('#filters').innerHTML = fs.map(f => `<button class="chip ${f.id===curSec?'active':''}" data-id="${f.id}">${f.label}<span class="c">${f.c}</span></button>`).join('');
-  $$('#filters .chip').forEach(b => b.onclick = () => { curSec = b.dataset.id; renderFilters(); refreshAll(); });
+/* ---------- State ---------- */
+let curSec = 'all', query = '', view = 'cards', fUnit = 'all', fLesson = 'all';
+
+/* ---------- فلتر الوحدة والدرس ---------- */
+const ORD_U = ['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة','السابعة','الثامنة','التاسعة','العاشرة'];
+const ORD_L = ['الأول','الثاني','الثالث','الرابع','الخامس','السادس','السابع','الثامن','التاسع','العاشر'];
+const LESSON_LABELS = { 4: 'الدرس الرابع والخامس' };
+const unitName   = n => 'الوحدة ' + (ORD_U[n-1] || n);
+const lessonName = n => LESSON_LABELS[n] || ('الدرس ' + (ORD_L[n-1] || n));
+const allWords   = () => DATA.sections.flatMap(s => s.words);
+
+function renderUL(){
+  const units = [...new Set(allWords().map(w => w.unit))].sort((a,b) => a-b);
+  $('#selUnit').innerHTML = '<option value="all">جميع الوحدات</option>' +
+    units.map(u => `<option value="${u}">${unitName(u)}</option>`).join('');
+  $('#selUnit').value = fUnit;
+
+  const lessons = [...new Set(allWords().filter(w => fUnit==='all' || w.unit===+fUnit).map(w => w.lesson))].sort((a,b) => a-b);
+  if(fLesson !== 'all' && !lessons.includes(+fLesson)) fLesson = 'all';
+  $('#selLesson').innerHTML = '<option value="all">جميع الدروس</option>' +
+    lessons.map(l => `<option value="${l}">${lessonName(l)}</option>`).join('');
+  $('#selLesson').value = fLesson;
 }
+$('#selUnit').onchange   = e => { fUnit = e.target.value; fLesson = 'all'; renderUL(); renderFilters(); refreshAll(); };
+$('#selLesson').onchange = e => { fLesson = e.target.value; renderFilters(); refreshAll(); };
+
+function renderFilters(){}
 function refreshAll(){ initDeck(); renderList(); initQuiz(); }
 
 /* ---------- Tabs ---------- */
@@ -767,10 +1142,10 @@ $('#qclear').onclick = () => { $('#q').value=''; query=''; $('#qclear').classLis
 
 /* ---------- Flashcards ---------- */
 let deck = [], di = 0, known = new Set(), flipTimer;
-function initDeck(startEn){
+function initDeck(startId){
   const pool = filtered();
-  deck = query.trim() || startEn ? pool : shuffle(pool);
-  di = startEn ? Math.max(0, deck.findIndex(w => w.en === startEn)) : 0;
+  deck = query.trim() || startId ? pool : shuffle(pool);
+  di = startId ? Math.max(0, deck.findIndex(w => w.id === startId)) : 0;
   known = new Set();
   $('#fcount').textContent = deck.length;
   const has = deck.length > 0;
@@ -787,7 +1162,7 @@ function fillCard(){
 function renderCard(dir){
   const c = $('#fcard'), st = $('#stage');
   clearTimeout(flipTimer);
-  const wasFlipped = c.classList.contains('flip') || c.classList.contains('on');
+  const wasFlipped = c.classList.contains('on');
   c.classList.remove('on');
   const apply = () => {
     fillCard();
@@ -815,7 +1190,7 @@ $('#bspk').onclick = e => { e.stopPropagation(); say(deck[di].en_sentence, e.cur
 $('#next').onclick = () => go(1);
 $('#prev').onclick = () => go(-1);
 $('#shuffle').onclick = () => { deck = shuffle(deck); di = 0; known = new Set(); renderCard(1); };
-$('#cKnow').onclick = () => { known.add(deck[di].en); if(di < deck.length-1){ di++; renderCard(1); } else renderCard(0); };
+$('#cKnow').onclick = () => { known.add(deck[di].id); if(di < deck.length-1){ di++; renderCard(1); } else renderCard(0); };
 $('#cAgain').onclick = () => { deck.push(deck[di]); $('#fcount').textContent = deck.length; if(di < deck.length-1){ di++; renderCard(1); } };
 
 let tx = 0, ty = 0;
@@ -845,7 +1220,7 @@ function renderList(){
     const w = pool[+r.dataset.i];
     r.onclick = e => {
       if(e.target.closest('.spk')){ say(w.en, e.target.closest('.spk')); return; }
-      initDeck(w.en); setView('cards');
+      initDeck(w.id); setView('cards');
     };
     r.onkeydown = e => { if(e.key==='Enter'){ r.click(); } };
   });
@@ -862,18 +1237,42 @@ function makeCloze(w){
     const clean = toks[i].replace(/[^A-Za-z']/g,'').toLowerCase();
     if(clean.length >= 2 && clean.startsWith(lw)) return toks.map((t,j)=> j===i ? t.replace(/[A-Za-z']+/g,'____') : t).join('');
   }
-  return w.en_sentence.replace(new RegExp(w.en,'gi'),'____');
+  const esc2 = x => x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  for(const v of w.en.split(/\s*\/\s*/)){
+    const out = w.en_sentence.replace(new RegExp(esc2(v),'gi'),'____');
+    if(out !== w.en_sentence) return out;
+  }
+  return w.en_sentence; // ما لقينا الكلمة في الجملة
 }
-function opts(w, list, key, isEn){ return shuffle([w, ...sample(list,3,w)]).map(x => ({t:x[key], en:isEn, ok:x===w})); }
+/* خيارات الإجابة: بدون تكرار نص الإجابة الصحيحة، ومن كل الكلمات لو الدرس فيه أقل من 4 كلمات */
+function opts(w, list, key, isEn){
+  const base = list.length >= 4 ? list : allWords();
+  const seen = new Set([w[key]]), d = [];
+  for(const x of shuffle(base)){
+    if(!seen.has(x[key])){ seen.add(x[key]); d.push(x); }
+    if(d.length === 3) break;
+  }
+  return shuffle([w, ...d]).map(x => ({t:x[key], en:isEn, ok:x===w}));
+}
 function buildQ(list){
   const w = list[Math.random()*list.length|0];
-  const t = TYPES[Math.random()*TYPES.length|0];
+  let t = TYPES[Math.random()*TYPES.length|0];
+  if(t==='cloze' && !makeCloze(w).includes('____')) t = 'meaning';
   if(t==='meaning') return {label:'اختر المعنى الصحيح', text:`ما معنى: <span class="en">${esc(w.en)}</span>`, sub:'', options:opts(w,list,'ar',false), en:w.en};
   if(t==='reverse') return {label:'اختر الكلمة الإنجليزية', text:`ما الكلمة الإنجليزية لـ: ${esc(w.ar)}`, sub:'', options:opts(w,list,'en',true), en:w.en};
   return {label:'أكمل الجملة بالكلمة الصحيحة', text:`<span class="en">${esc(makeCloze(w))}</span>`, sub:'الترجمة: '+w.ar_sentence, options:opts(w,list,'en',true), en:w.en};
 }
 function initQuiz(){
   const list = quizList(), total = Math.min(10, list.length);
+  if(!list.length){
+    $('#quiz').classList.add('hidden'); $('#done').classList.remove('hidden');
+    $('#qbar').style.width = '0%';
+    $('#ring').style.setProperty('--v', 0); $('#pct').textContent = '0%';
+    $('#doneTitle').textContent = 'لا توجد كلمات';
+    $('#doneMsg').textContent = 'غيّر الوحدة أو الدرس أو القسم.';
+    $('#sc').textContent = 0; $('#streak').textContent = 0;
+    return;
+  }
   queue = []; for(let i=0;i<total;i++) queue.push(buildQ(list));
   qi = 0; score = 0; streak = 0;
   $('#sc').textContent = 0; $('#streak').textContent = 0;
@@ -925,6 +1324,7 @@ function finishQuiz(){
   $('#doneTitle').textContent = pct >= 80 ? 'أداء رائع! 🎉' : 'أنهيت التمارين!';
   $('#doneMsg').textContent = `أجبت بشكل صحيح على ${score} من أصل ${queue.length}. ${pct >= 80 ? 'مستوى ممتاز، استمر!' : 'واصل التمرين وستتحسن بسرعة!'}`;
 }
+
 /* ---------- Install (PWA) ---------- */
 let deferredPrompt = null;
 const isStandalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
@@ -950,27 +1350,21 @@ if(isIOS && !isStandalone){
   $('#installTxt').textContent = 'دوس على زر المشاركة ⬆️ في سفاري، وبعدين "إضافة إلى الشاشة الرئيسية".';
   setTimeout(showInstall, 1500);
 }
-/* ---------- Init ---------- */
-renderFilters();
-refreshAll();
 
-// فحص حالة الاتصال بالإنترنت لإظهار/إخفاء الإعلان تلقائياً
+/* ---------- إخفاء الإعلان أوفلاين ---------- */
 function checkNetworkStatus() {
-  const adBox = document.getElementById('ad-banner');
-  if (adBox) {
-    if (navigator.onLine) {
-      adBox.style.display = 'block'; // إظهار الإعلان عند وجود نت
-    } else {
-      adBox.style.display = 'none';  // إخفاء الإعلان أوفلاين
-    }
-  }
+  const on = navigator.onLine;
+  const ad = document.querySelector('.ad');
+  if (ad) ad.style.display = on ? '' : 'none';
+  document.documentElement.style.setProperty('--ad-h', on ? '' : '0px');
 }
-
-// الاستماع لتغيرات الشبكة
 window.addEventListener('online', checkNetworkStatus);
 window.addEventListener('offline', checkNetworkStatus);
 
-// تشغيل الفحص فور فتح الصفحة
+/* ---------- Init ---------- */
+renderUL();
+renderFilters();
+refreshAll();
 checkNetworkStatus();
 </script>
 
