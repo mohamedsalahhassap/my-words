@@ -2116,6 +2116,11 @@ function checkNetworkStatus() {
 window.addEventListener('online', checkNetworkStatus);
 window.addEventListener('offline', checkNetworkStatus);
 
+// التحديث التلقائي فور رجوع الإنترنت
+window.addEventListener('online', () => {
+  // إعادة تحميل الصفحة تلقائياً لتحديث الإعلانات والمحتوى
+  window.location.reload();
+});
 /* ---------- Init ---------- */
 renderUL();
 renderFilters();
