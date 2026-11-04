@@ -2057,30 +2057,31 @@ function finishQuiz(){
 
 /* ---------- Install (PWA) ---------- */
 let deferredPrompt = null;
+
 const isStandalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
 const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-function snoozed(){ try { return Date.now() < +(localStorage.getItem('installSnooze') || 0); } catch(e){ return false; } }
-function showInstall(){ if(!isStandalone && !snoozed()) $('#install').classList.add('show'); }
-function hideInstall(days){
-  $('#install').classList.remove('show');
-  try { localStorage.setItem('installSnooze', Date.now() + days * 864e5); } catch(e){}
-}
+
+function showInstall(){ if(!isStandalone) $('#install').classList.add('show'); }
+function hideInstall(){ $('#install').classList.remove('show'); }
+
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; showInstall(); });
-window.addEventListener('appinstalled', () => hideInstall(365));
+window.addEventListener('appinstalled', () => hideInstall());
+
 $('#installBtn').onclick = async () => {
   if(!deferredPrompt) return;
   deferredPrompt.prompt();
   const r = await deferredPrompt.userChoice;
   deferredPrompt = null;
-  hideInstall(r.outcome === 'accepted' ? 365 : 3);
+  if(r.outcome === 'accepted') hideInstall();
 };
-$('#installX').onclick = () => hideInstall(3);
+
+$('#installX').onclick = () => hideInstall();
+
 if(isIOS && !isStandalone){
   $('#installBtn').classList.add('hidden');
-  $('#installTxt').textContent = 'دوس على زر المشاركة ⬆️ في سفاري، وبعدين "إضافة إلى الشاشة الرئيسية".';
+  $('#installTxt').textContent = 'على زر المشاركة ⬆️ في سفاري، وبعدين "إضافة إلى الشاشة الرئيسية"';
   setTimeout(showInstall, 1500);
 }
-
 /* ---------- إخفاء الإعلان أوفلاين ---------- */
 function checkNetworkStatus() {
   const on = navigator.onLine;
