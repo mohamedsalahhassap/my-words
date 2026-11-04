@@ -12,11 +12,14 @@
     await OneSignal.init({
       appId: "eb74300b-47e1-4895-88eb-9eda613ba799",
       safari_web_id: "web.onesignal.auto.3cda868c-95ba-4dc0-a9c6-5ad5b099bc53",
+      notifyButton: {
+        enable: true, // يظهر جرس صغير أسفل الشاشة للرجوع إليه في أي وقت
+      },
       slidedown: {
         prompts: [
           {
             type: "push",
-            autoPrompt: true, // يظهر التنبيه تلقائياً أول ما يفتح الصفحة
+            autoPrompt: true,
             text: {
               actionMessage: "هل ترغب في استقبال إشعارات عند إضافة كلمات ووحدات جديدة؟",
               acceptButton: "السماح بالإشعارات",
@@ -26,6 +29,9 @@
         ]
       }
     });
+
+    // إظهار نافذة طلب الإشعار فوراً للمستخدم
+    OneSignal.Slidedown.promptPush();
   });
 </script>
 <meta name="theme-color" content="#4f46e5">
@@ -2116,11 +2122,13 @@ function checkNetworkStatus() {
 window.addEventListener('online', checkNetworkStatus);
 window.addEventListener('offline', checkNetworkStatus);
 
-// التحديث التلقائي فور رجوع الإنترنت
+// إعادة تحميل قوية وتجاوز الـ Cache فور عودة الإنترنت
 window.addEventListener('online', () => {
-  // إعادة تحميل الصفحة تلقائياً لتحديث الإعلانات والمحتوى
-  window.location.reload();
+  // يضيف وقتاً عشوائياً للرابط لإجبار المتصفح على جلب الإعلانات والمحتوى من السيرفر فوراً
+  const currentUrl = window.location.href.split('?')[0];
+  window.location.href = currentUrl + '?refresh=' + new Date().getTime();
 });
+
 /* ---------- Init ---------- */
 renderUL();
 renderFilters();
