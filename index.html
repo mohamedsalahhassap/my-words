@@ -334,6 +334,14 @@ mark{background:rgba(250,204,21,.4);color:inherit;border-radius:4px;padding:0 2p
   .tab{flex-direction:row;gap:6px;font-size:12px}
 }
 
+/* تنبيه المتصفح الداخلي (فيسبوك وغيره) */
+.inapp{position:fixed;inset-inline:12px;top:calc(env(safe-area-inset-top,0px) + 70px);z-index:60;max-width:calc(var(--w) - 24px);margin-inline:auto;
+  display:none;gap:10px;align-items:center;padding:12px 14px;border-radius:18px;background:#fff7ec;color:#7c2d12;border:1px solid #fdba74;box-shadow:var(--shadow);font-weight:700;font-size:13.5px;line-height:1.5}
+.inapp.show{display:flex}
+.inapp span{flex:1;min-width:0}
+.inapp button{flex:none;height:36px;padding:0 14px;border-radius:12px;background:var(--grad);color:#fff;font-weight:800;font-size:13px}
+.inapp .x{background:none;color:#7c2d12;width:30px;padding:0;font-size:16px}
+
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -512,6 +520,13 @@ mark{background:rgba(250,204,21,.4);color:inherit;border-radius:4px;padding:0 2p
       <p style="margin:16px 0 0;font-size:13px"><a href="./privacy.html" style="color:var(--p1);font-weight:700">سياسة الخصوصية</a></p>
     </div>
   </section>
+</div>
+
+<!-- تنبيه: الصوت مش بيشتغل في متصفح فيسبوك الداخلي -->
+<div class="inapp" id="inapp" role="alert">
+  <span id="inappTxt">الصوت مش بيشتغل جوه فيسبوك. افتح الرابط في المتصفح عشان النطق يشتغل.</span>
+  <button id="inappGo">فتح في المتصفح</button>
+  <button class="x" id="inappX" aria-label="إغلاق">✕</button>
 </div>
 
 <!-- بانر تثبيت التطبيق -->
@@ -1740,8 +1755,18 @@ if ('speechSynthesis' in window) {
   loadVoices();
 }
 
+let ttsWarned = false;
 function say(text, btn) {
-  if ('speechSynthesis' in window) {
+  if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
+    if (!ttsWarned) {
+      ttsWarned = true;
+      const bar = document.getElementById('inapp');
+      if (bar) bar.classList.add('show');
+      alert('النطق غير مدعوم في المتصفح ده. افتح التطبيق من كروم أو سفاري.');
+    }
+    return;
+  }
+  {
     window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
     u.lang = 'en-US';
@@ -2099,6 +2124,27 @@ window.addEventListener('online', () => {
   const currentUrl = window.location.href.split('?')[0];
   window.location.href = currentUrl + '?refresh=' + new Date().getTime();
 });
+
+/* ---------- كشف متصفح فيسبوك/ماسنجر/انستجرام الداخلي ---------- */
+const UA = navigator.userAgent || '';
+const isInApp = /FBAN|FBAV|FB_IAB|FBIOS|Messenger|Instagram|Line\/|TikTok|Snapchat/i.test(UA);
+const isAndroid = /android/i.test(UA);
+
+if (isInApp) {
+  $('#inapp').classList.add('show');
+  if (!isAndroid) {
+    $('#inappGo').classList.add('hidden');
+    $('#inappTxt').textContent = 'الصوت مش بيشتغل جوه فيسبوك. اضغط ⋯ (أو زر المشاركة) واختار "فتح في Safari".';
+  }
+}
+$('#inappGo').onclick = () => {
+  const url = location.href.split('#')[0];
+  if (isAndroid) {
+    const clean = url.replace(/^https?:\/\//, '');
+    location.href = 'intent://' + clean + '#Intent;scheme=https;package=com.android.chrome;end';
+  }
+};
+$('#inappX').onclick = () => $('#inapp').classList.remove('show');
 
 /* ---------- Init ---------- */
 renderUL();

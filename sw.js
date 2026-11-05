@@ -3,7 +3,7 @@
    - ملفات التطبيق: الأول من النت (أحدث نسخة)، ولو أوفلاين من الكاش.
    - خطوط جوجل: تتخزن وتشتغل أوفلاين.
    - الإعلانات والموارد الخارجية التانية: بتعدي من غير تدخل. */
-const VERSION = 'lexi-v3';
+const VERSION = 'lexi-v4';
 const APP_CACHE = VERSION + '-app';
 const FONT_CACHE = 'lexi-fonts-v1';
 const PRECACHE = ['./', './index.html', './manifest.json', './icons/apple-touch-icon.png'];
